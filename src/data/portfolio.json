@@ -1,0 +1,74 @@
+{
+  "hero": {
+    "headline": "The Modern Marketing Generalist.",
+    "subheadline": "Senior Marketing Executive at Walr. I blend creative production, strategic storytelling, and technical operations to build brands that scale."
+  },
+  "nav": [
+    { "label": "About", "href": "#about" },
+    { "label": "Work", "href": "#work" },
+    { "label": "Experiments", "href": "#lab" }
+  ],
+  "bento": [
+    {
+      "id": "profile",
+      "content": {
+        "title": "Ollie Pinto",
+        "role": "Senior Marketing Executive",
+        "bio": "A full-stack marketer. I combine creative execution with systems thinking to drive growth, efficiency, and brand equity."
+      }
+    },
+    {
+      "id": "stack",
+      "content": {
+        "items": ["Adobe CC", "Figma", "Python", "Make.com", "Webflow", "SEO"]
+      }
+    }
+  ],
+  "projects": [
+    {
+      "id": 1,
+      "client": "Guild Esports",
+      "title": "Sky Broadband Partnership",
+      "tags": ["Strategy", "Commercial", "Campaign"],
+      "metric": "$1.1m Revenue Secured",
+      "color": "from-blue-600 to-indigo-900"
+    },
+    {
+      "id": 2,
+      "client": "Walr",
+      "title": "Full-Stack Marketing",
+      "tags": ["Content", "Ops", "Social"],
+      "metric": "Scalable Infrastructure",
+      "color": "from-emerald-600 to-teal-900"
+    },
+    {
+      "id": 3,
+      "client": "Triple Point",
+      "title": "Private Credit Rebrand",
+      "tags": ["B2B", "Brand Strategy", "SEO"],
+      "metric": "Market Repositioning",
+      "color": "from-purple-600 to-pink-900"
+    }
+  ],
+  "lab": {
+    "headline": "Experiments & Prototypes",
+    "description": "A playground for my curiosity—from writing about the future of work to building tools that automate the boring stuff.",
+    "experiments": [
+      {
+        "title": "Living Prototype",
+        "tools": ["Substack", "Writing", "Research"],
+        "desc": "My publication exploring how we work, live, and how emerging tech shapes the modern workplace."
+      },
+      {
+        "title": "Marketing Automations",
+        "tools": ["Python", "Make.com", "APIs"],
+        "desc": "Custom workflows to connect CRM, CMS, and Social—freeing up time for creative work."
+      },
+      {
+        "title": "AI Brand Assistant",
+        "tools": ["LLMs", "Prompt Engineering"],
+        "desc": "Built a custom tone-of-voice tool to ensure consistent messaging across distributed teams."
+      }
+    ]
+  }
+}

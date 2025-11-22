@@ -1,0 +1,57 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* The Theme Definitions */
+@layer base {
+  :root {
+    /* LIGHT MODE (DEFAULT) */
+    /* Clean, editorial off-white */
+    --bg-depth: oklch(0.98 0.005 240); 
+    /* Slightly darker white for cards */
+    --surface: oklch(1 0 0);
+    --surface-hover: oklch(0.96 0.01 240);
+    
+    /* Deep Charcoal for text (Not pure black, softer) */
+    --text-primary: oklch(0.15 0.02 240);
+    --text-muted: oklch(0.45 0 0);
+    
+    /* Accents - Darker for readability on light bg */
+    --accent-primary: oklch(0.55 0.15 150); /* Darker Mint */
+    --accent-secondary: oklch(0.50 0.2 300); /* Rich Violet */
+    
+    --border-color: oklch(0 0 0 / 0.1);
+  }
+
+  .dark {
+    /* DARK MODE */
+    /* Deep Blue/Grey */
+    --bg-depth: oklch(0.15 0.02 240);
+    /* Glassy dark surface */
+    --surface: oklch(0.20 0.03 240);
+    --surface-hover: oklch(0.25 0.04 240);
+    
+    /* White text */
+    --text-primary: oklch(0.98 0 0);
+    --text-muted: oklch(0.70 0 0);
+    
+    /* Accents - Brighter for dark bg */
+    --accent-primary: oklch(0.7 0.15 150); /* Electric Mint */
+    --accent-secondary: oklch(0.65 0.2 300); /* Digital Violet */
+    
+    --border-color: oklch(1 1 1 / 0.1);
+  }
+
+  body {
+    @apply bg-bg-depth text-text-primary font-sans antialiased transition-colors duration-300;
+  }
+}
+
+/* Hide scrollbar utilities */
+.no-scrollbar::-webkit-scrollbar {
+    display: none;
+}
+.no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}

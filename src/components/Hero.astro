@@ -1,0 +1,17 @@
+---
+import data from '../data/portfolio.json';
+---
+<section class="relative w-full h-screen flex items-center justify-center px-6">
+  <div class="absolute inset-0 z-0 opacity-30 dark:opacity-20 bg-gradient-to-br from-accent-primary/20 via-bg-depth to-accent-secondary/20 blur-3xl"></div>
+  
+  <div class="relative z-10 max-w-4xl text-center space-y-6">
+    <div class="inline-block px-3 py-1 border border-border-color rounded-full bg-surface/50 backdrop-blur-sm">
+      <span class="text-xs font-mono text-accent-primary uppercase tracking-widest">Available for Ops Roles</span>
+    </div>
+    <h1 class="text-5xl md:text-7xl font-bold tracking-tight text-text-primary">{data.hero.headline}</h1>
+    <p class="text-xl text-text-muted max-w-2xl mx-auto">{data.hero.subheadline}</p>
+    <div class="pt-8 flex gap-4 justify-center">
+      <a href="#about" class="px-8 py-3 bg-text-primary text-bg-depth font-medium rounded-full hover:scale-105 transition-transform shadow-lg">Explore Work</a>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,23 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar';
+import Hero from '../components/Hero.astro';
+import BentoGrid from '../components/BentoGrid';
+import CaseStudyRail from '../components/CaseStudyRail';
+import LabSection from '../components/LabSection.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout title="Ollie Pinto | Marketing Ops & Creative">
+    <Navbar client:load />
+
+    <Hero />
+	
+    <BentoGrid client:visible />
+	
+    <CaseStudyRail client:visible />
+
+    <LabSection />
+	
+    <Footer />
+</Layout>

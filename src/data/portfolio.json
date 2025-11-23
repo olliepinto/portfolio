@@ -1,11 +1,14 @@
 {
   "hero": {
-    "headline": "The Modern Marketing Generalist.",
-    "subheadline": "Senior Marketing Executive at Walr. I blend creative production, strategic storytelling, and technical operations to build brands that scale."
+    "badge": "based in london",
+    "headline": "Hi, I'm Ollie.",
+    "subheadline": "I help marketing teams work smarter by blending creativity and systems thinking to build experiences, workflows and content that scale.",
+    "ctaPrimary": "See My Experience",
+    "ctaSecondary": "More About Me"
   },
   "nav": [
     { "label": "About", "href": "#about" },
-    { "label": "Work", "href": "#work" },
+    { "label": "Experience", "href": "#work" },
     { "label": "Experiments", "href": "#lab" }
   ],
   "bento": [
@@ -13,62 +16,211 @@
       "id": "profile",
       "content": {
         "title": "Ollie Pinto",
-        "role": "Senior Marketing Executive",
-        "bio": "A full-stack marketer. I combine creative execution with systems thinking to drive growth, efficiency, and brand equity."
+        "role": "Full-Stack Marketer",
+        "bio": "Bridging the gap between creative storytelling and systems thinking. I build marketing engines that give teams room to breathe and do their best work."
       }
     },
     {
-      "id": "stack",
+      "id": "toolkit",
       "content": {
-        "items": ["Adobe CC", "Figma", "Python", "Make.com", "Webflow", "SEO"]
+        "title": "Toolkit",
+        "categories": [
+          {
+            "name": "creative & technical",
+            "color": "blue",
+            "items": ["copywriting", "adobe cc", "figma", "ui/ux design", "wordpress", "framer", "webflow", "video & motion", "vibe coding"]
+          },
+          {
+            "name": "ops & automation",
+            "color": "emerald",
+            "items": ["python", "make.com", "n8n", "hubspot", "activecampaign", "process optimisation"]
+          },
+          {
+            "name": "strategy",
+            "color": "orange",
+            "items": ["gtm strategy", "social strategy", "seo & analytics", "project management"]
+          }
+        ]
+      }
+    },
+    {
+      "id": "creative",
+      "content": {
+        "title": "Creative Background",
+        "text": "Started making YouTube videos in 2009. Began my career hands-on with video, then moved through design, UX and marketing. Now I'm adding more technical work to the mix thanks to AI tools."
+      }
+    },
+    {
+      "id": "university",
+      "content": {
+        "degree": "BA (Hons) Media Production",
+        "grade": "First Class Honours",
+        "school": "Bournemouth University",
+        "desc": "Designed a mobile app called Drops Music. Built the UI, made an animated prototype, and led a crew to shoot integrated content."
+      }
+    },
+    {
+      "id": "interests",
+      "content": {
+        "title": "Personal Interests",
+        "text": "Chelsea supporter. FPL obsessive. Into mindfulness, reading, music, podcasts, AI and tech. Always curious about how people and technology evolve together."
+      }
+    },
+    {
+      "id": "substack",
+      "content": {
+        "title": "Living Prototype",
+        "label": "Currently Writing",
+        "link_text": "Read Substack",
+        "url": "https://olliepinto.substack.com/"
       }
     }
   ],
-  "projects": [
-    {
-      "id": 1,
-      "client": "Guild Esports",
-      "title": "Sky Broadband Partnership",
-      "tags": ["Strategy", "Commercial", "Campaign"],
-      "metric": "$1.1m Revenue Secured",
-      "color": "from-blue-600 to-indigo-900"
-    },
-    {
-      "id": 2,
-      "client": "Walr",
-      "title": "Full-Stack Marketing",
-      "tags": ["Content", "Ops", "Social"],
-      "metric": "Scalable Infrastructure",
-      "color": "from-emerald-600 to-teal-900"
-    },
-    {
-      "id": 3,
-      "client": "Triple Point",
-      "title": "Private Credit Rebrand",
-      "tags": ["B2B", "Brand Strategy", "SEO"],
-      "metric": "Market Repositioning",
-      "color": "from-purple-600 to-pink-900"
-    }
-  ],
+  "work": {
+    "headline": "Experience Archive",
+    "subheadline": "An overview of where I've worked and what I've built along the way.",
+    "projects": [
+      {
+        "id": "walr",
+        "client": "Walr",
+        "role": "Senior Marketing Executive",
+        "period": "June 2024 - Present",
+        "tags": ["ops", "content", "automation"],
+        "short_desc": "Blending creative work with systems thinking to scale marketing.",
+        "full_desc": [
+            "Drove consistent YoY growth in social impressions and engagement. Shaped our tone of voice, ran regular performance standups, and created actionable optimisations that led to strong client feedback.",
+            "Built a multi-step automation to modernise inbound lead processing. Filters spam, uses AI to generate company summaries and calculate ICP scores, then routes qualified leads instantly to Slack. Significantly reduced irrelevant leads.",
+            "Created custom AI systems for the team that contextualise each request for ICP fit, tone of voice and proposition matching.",
+            "Managed WordPress CMS and implemented cost-saving CRM solutions for email marketing."
+        ]
+      },
+      {
+        "id": "guild",
+        "client": "Guild Esports",
+        "role": "Marketing Executive",
+        "period": "June 2023 - June 2024",
+        "tags": ["strategy", "commercial", "campaign"],
+        "short_desc": "Helped secure $1.1m revenue for Sky Broadband Gaming Plan.",
+        "full_desc": [
+            "Coordinated development and design of the new website, writing copy and optimising SEO.",
+            "Devised and executed B2B strategy, including investor newsletters and LinkedIn cadence.",
+            "Created a custom AI tone-of-voice tool to enable consistent brand messaging.",
+            "Led Sky partnership social activity, contributing to 80.6m impressions."
+        ]
+      },
+      {
+        "id": "triple",
+        "client": "Triple Point",
+        "role": "Marketing Assistant",
+        "period": "Jan 2022 - Apr 2023",
+        "tags": ["b2b", "rebrand", "financial services"],
+        "short_desc": "Supported digital activity for a major B2B Private Credit rebrand.",
+        "full_desc": [
+            "Played a key role in the successful B2B rebrand of the Private Credit business line.",
+            "Coordinated effective campaigns resulting in increased engagement with investors.",
+            "Managed suppliers for high-quality video, webinar and presentation production.",
+            "Supported digital marketing efforts, optimising website UX/SEO and managing LinkedIn campaigns."
+        ]
+      },
+      {
+        "id": "csl",
+        "client": "CSL Integration",
+        "role": "Projects Assistant",
+        "period": "May 2021 - Sep 2021",
+        "tags": ["operations", "procurement", "brand"],
+        "short_desc": "Streamlined procurement and updated brand assets.",
+        "full_desc": [
+            "Completed and streamlined procurement processes, including liaising with suppliers and logging invoices.",
+            "Updated company template assets for a planned rebrand, ensuring smooth transition."
+        ]
+      },
+      {
+        "id": "baxter",
+        "client": "Baxter",
+        "role": "Motion Designer",
+        "period": "Feb 2020 - May 2020",
+        "tags": ["motion", "startup", "ui/ux"],
+        "short_desc": "Designed animated prototypes for a fashion social commerce startup.",
+        "full_desc": [
+            "Created a promotional video for the mobile app and a website showcase animation.",
+            "Transformed UI assets into animated features using 2D and 3D motion software.",
+            "Enhanced the company's prospects among retailers and investors through high-fidelity prototypes."
+        ]
+      },
+      {
+        "id": "decca",
+        "client": "Decca Records",
+        "role": "Intern",
+        "period": "Dec 2019",
+        "tags": ["music", "promotions"],
+        "short_desc": "Work experience in the Promotions department at UMG.",
+        "full_desc": [
+            "Completed travel requisitions, updated department data entries.",
+            "Booked travel and assisted celebrity talent appearing on This Morning."
+        ]
+      },
+      {
+        "id": "vebu",
+        "client": "Vebu",
+        "role": "Creative",
+        "period": "July 2018 - Aug 2018",
+        "tags": ["agency", "seo", "video"],
+        "short_desc": "Boosted SEO and produced creative assets for agency clients.",
+        "full_desc": [
+            "Completed client work in corporate video editing, graphic design and motion graphics.",
+            "Boosted SEO of digital channels, writing blog posts for improved discoverability.",
+            "Standardised the agency's SEO processes with a custom guide."
+        ]
+      },
+      {
+        "id": "freelance",
+        "client": "Freelance",
+        "role": "Video Editor & Designer",
+        "period": "Mar 2017 - June 2018",
+        "tags": ["youtube", "gaming", "content"],
+        "short_desc": "Produced content for gaming channels with several 100k+ view videos.",
+        "full_desc": [
+            "Managed YouTube channel for popular Twitch personality.",
+            "Produced card reveal videos and instructional content in association with Blizzard Entertainment.",
+            "Successfully grew the channel to over 10,000 subscribers."
+        ]
+      },
+      {
+        "id": "sky",
+        "client": "Sky Creative",
+        "role": "Fast Forward Intern",
+        "period": "July 2015 - June 2016",
+        "tags": ["broadcast", "branding", "motion"],
+        "short_desc": "11-month internship rotating through creative departments.",
+        "full_desc": [
+            "Rotated through creative departments, specialising in Brand Experience.",
+            "Worked on internal branding for Game of Thrones S6, Sky Difference and Sky Wilmslow.",
+            "Produced a broadcasted promo for Z Nation on Pick TV and created assets for Sky Sports."
+        ]
+      }
+    ]
+  },
   "lab": {
+    "badge": "experimental",
     "headline": "Experiments & Prototypes",
-    "description": "A playground for my curiosity—from writing about the future of work to building tools that automate the boring stuff.",
+    "description": "A little playground for my curiosity. Trying out ideas about work, writing about AI, and building tools that make boring tasks less boring.",
     "experiments": [
       {
         "title": "Living Prototype",
-        "tools": ["Substack", "Writing", "Research"],
-        "desc": "My publication exploring how we work, live, and how emerging tech shapes the modern workplace."
+        "tools": ["substack", "writing", "research"],
+        "desc": "My Substack where I write about work, life and how emerging tech is changing the modern workplace."
       },
       {
-        "title": "Marketing Automations",
-        "tools": ["Python", "Make.com", "APIs"],
-        "desc": "Custom workflows to connect CRM, CMS, and Social—freeing up time for creative work."
+        "title": "AI Lead Triage Engine",
+        "tools": ["make.com", "openai", "slack"],
+        "desc": "A multi-step automation to modernise inbound B2B lead processing. It filters spam, uses AI to generate company summaries and calculate ICP scores, then routes qualified leads instantly to Slack for the sales team."
       },
       {
-        "title": "AI Brand Assistant",
-        "tools": ["LLMs", "Prompt Engineering"],
-        "desc": "Built a custom tone-of-voice tool to ensure consistent messaging across distributed teams."
+        "title": "Vibe Coding Architecture",
+        "tools": ["gemini", "astro", "react"],
+        "desc": "This portfolio is a live case study in vibe coding. Built by leveraging Gemini 3.0 to architect a high-performance, modern tech stack, it demonstrates how non-coders can deploy production-grade websites without getting stuck in boilerplate."
       }
     ]
-  }
+  },
+  "footer": "© 2025 Ollie Pinto"
 }

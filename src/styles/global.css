@@ -2,42 +2,37 @@
 @tailwind components;
 @tailwind utilities;
 
-/* The Theme Definitions */
 @layer base {
   :root {
-    /* LIGHT MODE (DEFAULT) */
-    /* Clean, editorial off-white */
-    --bg-depth: oklch(0.98 0.005 240); 
-    /* Slightly darker white for cards */
+    /* REVERTED: Clean Light Mode */
+    --bg-depth: oklch(0.99 0.005 240); 
     --surface: oklch(1 0 0);
-    --surface-hover: oklch(0.96 0.01 240);
+    --surface-hover: oklch(0.97 0.01 240);
     
-    /* Deep Charcoal for text (Not pure black, softer) */
     --text-primary: oklch(0.15 0.02 240);
     --text-muted: oklch(0.45 0 0);
     
-    /* Accents - Darker for readability on light bg */
-    --accent-primary: oklch(0.55 0.15 150); /* Darker Mint */
-    --accent-secondary: oklch(0.50 0.2 300); /* Rich Violet */
+    /* 1. Primary: MINT GREEN (Kept, but cleaner) */
+    --accent-primary: oklch(0.7 0.15 150); 
+    
+    /* 2. Secondary: TERRACOTTA (Replaces Purple) */
+    /* Using the specific hex from your palette */
+    --accent-secondary: #E39A7B; 
     
     --border-color: oklch(0 0 0 / 0.1);
   }
 
   .dark {
-    /* DARK MODE */
-    /* Deep Blue/Grey */
+    /* REVERTED: Clean Dark Mode */
     --bg-depth: oklch(0.15 0.02 240);
-    /* Glassy dark surface */
     --surface: oklch(0.20 0.03 240);
     --surface-hover: oklch(0.25 0.04 240);
     
-    /* White text */
     --text-primary: oklch(0.98 0 0);
     --text-muted: oklch(0.70 0 0);
     
-    /* Accents - Brighter for dark bg */
-    --accent-primary: oklch(0.7 0.15 150); /* Electric Mint */
-    --accent-secondary: oklch(0.65 0.2 300); /* Digital Violet */
+    --accent-primary: oklch(0.7 0.15 150);
+    --accent-secondary: #E39A7B; /* Terracotta in Dark Mode too */
     
     --border-color: oklch(1 1 1 / 0.1);
   }
@@ -45,9 +40,19 @@
   body {
     @apply bg-bg-depth text-text-primary font-sans antialiased transition-colors duration-300;
   }
+  
+  /* Headings use Abril Fatface */
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-serif tracking-normal font-normal;
+  }
 }
 
-/* Hide scrollbar utilities */
+/* Improved Green Hover Utility */
+/* This makes the green hover feel 'glowy' rather than dark */
+.hover\:bg-accent-primary\/80:hover {
+    background-color: color-mix(in srgb, var(--accent-primary), white 20%);
+}
+
 .no-scrollbar::-webkit-scrollbar {
     display: none;
 }

@@ -1,17 +1,40 @@
 ---
-import data from '../data/portfolio.json';
+import HeroText from './HeroText';
+import HeroBackground from './HeroBackground';
 ---
-<section class="relative w-full h-screen flex items-center justify-center px-6">
-  <div class="absolute inset-0 z-0 opacity-30 dark:opacity-20 bg-gradient-to-br from-accent-primary/20 via-bg-depth to-accent-secondary/20 blur-3xl"></div>
+<section class="relative w-full min-h-[85vh] flex items-center justify-center px-6 pt-32 md:pt-40 pb-12 overflow-hidden">
   
-  <div class="relative z-10 max-w-4xl text-center space-y-6">
-    <div class="inline-block px-3 py-1 border border-border-color rounded-full bg-surface/50 backdrop-blur-sm">
-      <span class="text-xs font-mono text-accent-primary uppercase tracking-widest">Available for Ops Roles</span>
+  <HeroBackground client:load />
+
+  <div class="absolute inset-0 z-0 pointer-events-none bg-gradient-to-b from-bg-depth/0 via-bg-depth/50 to-bg-depth"></div>
+  
+  <div class="relative z-10 max-w-[1280px] w-full grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-20 items-center">
+    
+    <div class="relative order-last md:order-first group flex justify-center md:justify-start">
+        <div class="absolute -inset-2 bg-gradient-to-r from-accent-primary to-accent-secondary rounded-[2.5rem] opacity-20 blur-xl transition duration-500 group-hover:opacity-40"></div>
+        <img 
+            src="/assets/headshot-hero.webp" 
+            alt="Ollie Pinto" 
+            width="500"
+            height="500"
+            class="relative w-full max-w-[500px] aspect-square object-cover rounded-[2.5rem] border border-border-color shadow-2xl transform transition duration-700 hover:scale-[1.02] hover:-rotate-1 bg-surface"
+        />
     </div>
-    <h1 class="text-5xl md:text-7xl font-bold tracking-tight text-text-primary">{data.hero.headline}</h1>
-    <p class="text-xl text-text-muted max-w-2xl mx-auto">{data.hero.subheadline}</p>
-    <div class="pt-8 flex gap-4 justify-center">
-      <a href="#about" class="px-8 py-3 bg-text-primary text-bg-depth font-medium rounded-full hover:scale-105 transition-transform shadow-lg">Explore Work</a>
+
+    <div class="relative">
+        
+        <div 
+            class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[150%] h-[150%] z-[-1] pointer-events-none transition-opacity duration-300 opacity-100 dark:opacity-0"
+            style="background: radial-gradient(closest-side, rgba(255,255,255,1) 60%, rgba(255,255,255,0) 100%);"
+        ></div>
+
+        <div 
+            class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[150%] h-[150%] z-[-1] pointer-events-none transition-opacity duration-300 opacity-0 dark:opacity-100"
+            style="background: radial-gradient(closest-side, rgba(26,26,26,1) 60%, rgba(26,26,26,0) 100%);"
+        ></div>
+        
+        <HeroText client:load />
     </div>
+
   </div>
 </section>

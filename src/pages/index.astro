@@ -1,21 +1,24 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import Loader from '../components/Loader'; // Import the Loader
 import Navbar from '../components/Navbar';
 import Hero from '../components/Hero.astro';
 import BentoGrid from '../components/BentoGrid';
-import CaseStudyRail from '../components/CaseStudyRail';
+import WorkGrid from '../components/CaseStudyRail'; // Note: We renamed the component internally but file is still CaseStudyRail
 import LabSection from '../components/LabSection.astro';
 import Footer from '../components/Footer.astro';
 ---
 
 <Layout title="Ollie Pinto | Marketing Ops & Creative">
+    <Loader client:load />
+
     <Navbar client:load />
 
     <Hero />
 	
     <BentoGrid client:visible />
 	
-    <CaseStudyRail client:visible />
+    <WorkGrid client:visible />
 
     <LabSection />
 	

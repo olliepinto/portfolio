@@ -1,7 +1,17 @@
 ---
 import '../styles/global.css';
-import '@fontsource/geist-sans';
-import '@fontsource/geist-mono';
+
+// 1. Body Font (Functional)
+import '@fontsource/inter'; 
+// 2. Headline Font (Loud/Bold)
+import '@fontsource/inter-tight'; 
+// 3. Editorial Font (Elegant/Serif)
+import '@fontsource/newsreader'; 
+// 4. UI Font (Friendly/Geometric)
+import '@fontsource/poppins';
+// 5. Display Font (High Contrast)
+import '@fontsource/abril-fatface';
+
 const { title } = Astro.props;
 ---
 <!doctype html>
@@ -11,11 +21,13 @@ const { title } = Astro.props;
 		<meta name="viewport" content="width=device-width" />
 		<title>{title}</title>
         <script is:inline>
-            // Force Light Mode by default. Only enable dark if explicitly stored.
+            // Only enable dark mode if the user explicitly chose it before.
+            // Otherwise, force remove it (Light Mode Default).
             if (localStorage.theme === 'dark') {
                 document.documentElement.classList.add('dark');
             } else {
                 document.documentElement.classList.remove('dark');
+                localStorage.theme = 'light'; // Ensure memory is set to light
             }
         </script>
 	</head>

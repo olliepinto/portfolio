@@ -3,18 +3,15 @@ import { Moon, Sun } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 export default function ThemeToggle() {
+  // Default state is 'light'
   const [theme, setTheme] = useState<'light' | 'dark'>('light');
 
   useEffect(() => {
-    // STRICT DEFAULT: Light Mode
-    // Only switch to dark if the user explicitly saved 'dark' in the past.
-    // We intentionally ignore window.matchMedia to force the Editorial Light look.
-    if (localStorage.theme === 'dark') {
+    // On load, sync state with what's actually on the HTML tag
+    if (document.documentElement.classList.contains('dark')) {
       setTheme('dark');
-      document.documentElement.classList.add('dark');
     } else {
       setTheme('light');
-      document.documentElement.classList.remove('dark');
     }
   }, []);
 

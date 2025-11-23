@@ -5,15 +5,20 @@ import data from '../data/portfolio.json';
 <section id="lab" class="w-full py-24 border-t border-border-color bg-surface/20">
   <div class="max-w-[1280px] mx-auto px-6">
     <div class="mb-12">
-        <div class="inline-flex items-center gap-2 px-3 py-1 mb-4 border border-accent-secondary/30 rounded-full bg-accent-secondary/10">
+        <div class="inline-flex items-center gap-2 px-4 py-2 mb-4 border border-accent-secondary/30 rounded-full bg-accent-secondary/10">
             <span class="relative flex h-2 w-2">
               <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent-secondary opacity-75"></span>
               <span class="relative inline-flex rounded-full h-2 w-2 bg-accent-secondary"></span>
             </span>
-            <span class="text-xs font-mono text-accent-secondary uppercase tracking-widest">Experimental</span>
+            <span class="text-sm font-medium text-accent-secondary lowercase font-sans">{data.lab.badge}</span>
         </div>
-        <h2 class="text-3xl md:text-4xl font-bold mb-2 text-text-primary">{data.lab.headline}</h2>
-        <p class="text-text-muted">{data.lab.description}</p>
+        
+        {/* FIX: Applied font-serif (Abril Fatface) and ensuring 'class' attribute is used */}
+        <h2 class="text-3xl md:text-5xl font-serif font-normal tracking-wide mb-2 text-text-primary">
+            {data.lab.headline}
+        </h2>
+        
+        <p class="text-text-muted max-w-2xl font-sans">{data.lab.description}</p>
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -22,11 +27,13 @@ import data from '../data/portfolio.json';
           <div class="mb-4 p-3 bg-surface-hover border border-border-color rounded-lg w-fit group-hover:scale-110 transition-transform text-accent-secondary">
              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v4"/><path d="m16.2 7.8 2.9-2.9"/><path d="M18 12h4"/><path d="m16.2 16.2 2.9 2.9"/><path d="M12 18v4"/><path d="m4.9 19.1 2.9-2.9"/><path d="M2 12h4"/><path d="m4.9 4.9 2.9 2.9"/></svg>
           </div>
-          <h3 class="text-xl font-bold mb-2 text-text-primary">{exp.title}</h3>
-          <p class="text-sm text-text-muted mb-4">{exp.desc}</p>
+          
+          <h3 class="text-xl font-sans font-bold mb-2 text-text-primary">{exp.title}</h3>
+          
+          <p class="text-sm text-text-muted mb-4 leading-relaxed font-sans">{exp.desc}</p>
           <div class="flex flex-wrap gap-2 mt-auto">
             {exp.tools.map(tool => (
-               <span class="text-[10px] font-mono px-2 py-1 rounded bg-surface-hover border border-border-color text-text-muted">{tool}</span>
+               <span class="text-xs font-medium px-3 py-1 rounded-full bg-surface-hover border border-border-color text-text-muted lowercase font-sans">{tool}</span>
             ))}
           </div>
         </div>

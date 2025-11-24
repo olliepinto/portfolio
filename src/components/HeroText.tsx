@@ -3,7 +3,11 @@ import { motion } from 'framer-motion';
 import { ArrowDownRight } from 'lucide-react';
 import data from '../data/portfolio.json';
 
-export default function HeroText() {
+interface HeroTextProps {
+  headingId?: string;
+}
+
+export default function HeroText({ headingId }: HeroTextProps) {
   const container = {
     hidden: { opacity: 0 },
     show: {
@@ -46,7 +50,11 @@ export default function HeroText() {
        </motion.div>
 
        {/* Headline */}
-       <motion.h1 variants={item} className="text-5xl md:text-7xl lg:text-8xl font-serif font-normal tracking-wide text-text-primary leading-[1.1]">
+       <motion.h1
+        id={headingId}
+        variants={item}
+        className="text-5xl md:text-7xl lg:text-8xl font-serif font-normal tracking-wide text-text-primary leading-[1.1]"
+      >
          {data.hero.headline}
        </motion.h1>
 

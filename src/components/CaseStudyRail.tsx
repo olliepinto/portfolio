@@ -1,10 +1,54 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowUpRight, X, Calendar, ChevronRight } from 'lucide-react';
 import data from '../data/portfolio.json';
 
 export default function WorkGrid() {
   const [selectedProject, setSelectedProject] = useState<any>(null);
+  const dialogRef = useRef<HTMLDivElement>(null);
+  const closeButtonRef = useRef<HTMLButtonElement>(null);
+
+  useEffect(() => {
+    if (!selectedProject) {
+      return;
+    }
+
+    const dialogNode = dialogRef.current;
+    const focusableSelectors = [
+      'a[href]',
+      'button:not([disabled])',
+      'textarea',
+      'input',
+      'select',
+      '[tabindex]:not([tabindex="-1"])',
+    ].join(', ');
+
+    const focusableElements = dialogNode ? Array.from(dialogNode.querySelectorAll<HTMLElement>(focusableSelectors)) : [];
+    const firstElement = focusableElements[0];
+    const lastElement = focusableElements[focusableElements.length - 1];
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        setSelectedProject(null);
+      }
+
+      if (event.key === 'Tab' && focusableElements.length > 0) {
+        if (event.shiftKey && document.activeElement === firstElement) {
+          event.preventDefault();
+          lastElement?.focus();
+        } else if (!event.shiftKey && document.activeElement === lastElement) {
+          event.preventDefault();
+          firstElement?.focus();
+        }
+      }
+    };
+
+    const focusTarget = closeButtonRef.current ?? firstElement;
+    focusTarget?.focus();
+
+    document.addEventListener('keydown', handleKeyDown);
+    return () => document.removeEventListener('keydown', handleKeyDown);
+  }, [selectedProject]);
 
   return (
     <section id="work" className="w-full py-24 border-t border-border-color bg-surface/30">
@@ -15,11 +59,15 @@ export default function WorkGrid() {
 
       <div className="max-w-[1280px] mx-auto px-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {data.work.projects.map((project, index) => (
-          <motion.div 
+          <motion.button 
             key={project.id}
             onClick={() => setSelectedProject(project)}
             // FIX: Removed 'transition-all'. Added 'transition-colors transition-shadow'.
-            className="bg-surface border border-border-color rounded-2xl p-8 cursor-pointer hover:shadow-lg hover:border-accent-secondary/30 transition-colors transition-shadow duration-300 group h-full flex flex-col flicker-fix"
+            type="button"
+            aria-haspopup="dialog"
+            aria-controls="project-detail-dialog"
+            aria-label={`View case study details for ${project.client}`}
+            className="bg-surface border border-border-color rounded-2xl p-8 cursor-pointer hover:shadow-lg hover:border-accent-secondary/30 transition-colors transition-shadow duration-300 group h-full flex flex-col flicker-fix text-left"
             
             // NOTE: We kept 'z:0' from previous fix as it is still good practice for GPU locking
             initial={{ opacity: 0, y: 20, z: 0 }}
@@ -43,7 +91,7 @@ export default function WorkGrid() {
             <p className="text-text-primary/80 leading-relaxed mt-auto font-sans text-sm">
               {project.short_desc}
             </p>
-          </motion.div>
+          </motion.button>
         ))}
       </div>
 
@@ -57,15 +105,24 @@ export default function WorkGrid() {
             className="fixed inset-0 z-[100] flex items-center justify-center px-4 bg-bg-depth/80 backdrop-blur-sm"
           >
             <motion.div 
+              ref={dialogRef}
               initial={{ scale: 0.9, opacity: 0, y: 20 }}
               animate={{ scale: 1, opacity: 1, y: 0 }}
               exit={{ scale: 0.9, opacity: 0, y: 20 }}
               onClick={(e) => e.stopPropagation()}
+              role="dialog"
+              aria-modal="true"
+              aria-labelledby="project-detail-title"
+              aria-describedby="project-detail-description"
+              id="project-detail-dialog"
               className="bg-surface border border-border-color rounded-3xl p-8 md:p-12 max-w-2xl w-full shadow-2xl relative overflow-y-auto max-h-[90vh]"
             >
               <button 
+                ref={closeButtonRef}
                 onClick={() => setSelectedProject(null)}
-                className="absolute top-6 right-6 p-2 bg-surface-hover rounded-full hover:bg-border-color transition-colors"
+                type="button"
+                aria-label="Close project details"
+                className="absolute top-6 right-6 p-2 bg-surface-hover rounded-full hover:bg-border-color transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-text-primary"
               >
                 <X size={20} />
               </button>
@@ -75,9 +132,9 @@ export default function WorkGrid() {
                 <span>{selectedProject.period}</span>
               </div>
               
-              <h2 className="text-3xl md:text-4xl font-sans font-bold mb-2 text-text-primary">{selectedProject.client}</h2>
+              <h2 id="project-detail-title" className="text-3xl md:text-4xl font-sans font-bold mb-2 text-text-primary">{selectedProject.client}</h2>
               
-              <h3 className="text-xl text-accent-secondary font-medium mb-8 font-sans">{selectedProject.role}</h3>
+              <h3 id="project-detail-description" className="text-xl text-accent-secondary font-medium mb-8 font-sans">{selectedProject.role}</h3>
 
               <div className="space-y-6">
                 <div className="flex flex-wrap gap-2 mb-6">

@@ -10,7 +10,9 @@
     "jsxImportSource": "react",
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
-    
+    "typeRoots": [
+      "./node_modules/@types"
+    ],
     // THE IMPORTANT PART: Ignore library errors
     "skipLibCheck": true,
     "strict": false

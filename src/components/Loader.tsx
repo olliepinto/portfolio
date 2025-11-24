@@ -49,6 +49,9 @@ export default function Loader() {
         <motion.div
           initial={{ opacity: 1 }}
           exit={{ y: "-100vh", transition: { duration: 0.8, ease: [0.76, 0, 0.24, 1] } }}
+          role="status"
+          aria-live="polite"
+          aria-label="Site loading"
           className="fixed inset-0 z-[999] flex flex-col items-center justify-center bg-bg-depth text-text-primary px-4"
         >
           <div className="w-full max-w-md">

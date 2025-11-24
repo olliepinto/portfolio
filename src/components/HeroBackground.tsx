@@ -47,7 +47,7 @@ export default function HeroBackground() {
   }, []);
 
   return (
-    <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none opacity-40 dark:opacity-20">
+    <div aria-hidden="true" className="absolute inset-0 z-0 overflow-hidden pointer-events-none opacity-40 dark:opacity-20">
       
       {/* Layer 1: Large Slow Waves */}
       <motion.div 

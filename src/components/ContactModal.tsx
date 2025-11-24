@@ -1,9 +1,53 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, Send, CheckCircle, Loader2 } from 'lucide-react';
 
 export default function ContactModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) {
   const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
+  const dialogRef = useRef<HTMLDivElement>(null);
+  const closeButtonRef = useRef<HTMLButtonElement>(null);
+
+  useEffect(() => {
+    if (!isOpen) {
+      return;
+    }
+
+    const dialogNode = dialogRef.current;
+    const focusableSelectors = [
+      'a[href]',
+      'button:not([disabled])',
+      'textarea',
+      'input',
+      'select',
+      '[tabindex]:not([tabindex="-1"])',
+    ].join(', ');
+
+    const focusableElements = dialogNode ? Array.from(dialogNode.querySelectorAll<HTMLElement>(focusableSelectors)) : [];
+    const firstElement = focusableElements[0];
+    const lastElement = focusableElements[focusableElements.length - 1];
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        onClose();
+      }
+
+      if (event.key === 'Tab' && focusableElements.length > 0) {
+        if (event.shiftKey && document.activeElement === firstElement) {
+          event.preventDefault();
+          lastElement?.focus();
+        } else if (!event.shiftKey && document.activeElement === lastElement) {
+          event.preventDefault();
+          firstElement?.focus();
+        }
+      }
+    };
+
+    const focusTarget = closeButtonRef.current ?? firstElement;
+    focusTarget?.focus();
+
+    document.addEventListener('keydown', handleKeyDown);
+    return () => document.removeEventListener('keydown', handleKeyDown);
+  }, [isOpen, onClose]);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -49,16 +93,24 @@ export default function ContactModal({ isOpen, onClose }: { isOpen: boolean; onC
           className="fixed inset-0 z-[100] flex items-center justify-center px-4 bg-bg-depth/80 backdrop-blur-sm"
         >
           <motion.div
+            ref={dialogRef}
             initial={{ scale: 0.95, opacity: 0, y: 20 }}
             animate={{ scale: 1, opacity: 1, y: 0 }}
             exit={{ scale: 0.95, opacity: 0, y: 20 }}
             onClick={(e) => e.stopPropagation()}
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="contact-modal-title"
+            aria-describedby="contact-modal-description"
             className="bg-surface border border-border-color rounded-3xl p-8 max-w-md w-full shadow-2xl relative overflow-hidden"
           >
             {/* Close Button */}
             <button 
+              ref={closeButtonRef}
               onClick={onClose}
-              className="absolute top-6 right-6 p-2 bg-surface-hover rounded-full hover:bg-border-color transition-colors text-text-muted hover:text-text-primary"
+              type="button"
+              aria-label="Close contact form"
+              className="absolute top-6 right-6 p-2 bg-surface-hover rounded-full hover:bg-border-color transition-colors text-text-muted hover:text-text-primary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-text-primary"
             >
               <X size={20} />
             </button>
@@ -66,9 +118,9 @@ export default function ContactModal({ isOpen, onClose }: { isOpen: boolean; onC
             {/* Header: Friendly & Editorial */}
             <div className="mb-8">
                 {/* Abril Fatface for the big headline */}
-                <h2 className="text-3xl font-serif font-normal text-text-primary mb-2">Let's Chat</h2>
+                <h2 id="contact-modal-title" className="text-3xl font-serif font-normal text-text-primary mb-2">Let's Chat</h2>
                 {/* Poppins for the friendly subtext */}
-                <p className="text-text-muted font-sans text-sm leading-relaxed">
+                <p id="contact-modal-description" className="text-text-muted font-sans text-sm leading-relaxed">
                   Got a project in mind, or just want to say hi? I'm always open to discussing new ideas.
                 </p>
             </div>
@@ -88,36 +140,39 @@ export default function ContactModal({ isOpen, onClose }: { isOpen: boolean; onC
                     
                     {/* Name Field */}
                     <div className="space-y-1">
-                        <label htmlFor="name" className="text-sm font-medium text-text-primary ml-1 font-sans">Name</label>
+                        <label htmlFor="contact-name" className="text-sm font-medium text-text-primary ml-1 font-sans">Name</label>
                         <input 
                             type="text" 
                             name="name" 
                             required 
                             placeholder="What should I call you?"
+                            id="contact-name"
                             className="w-full bg-surface-hover border border-border-color rounded-xl px-4 py-3 text-text-primary focus:outline-none focus:border-accent-primary transition-colors font-sans placeholder:text-text-muted/50"
                         />
                     </div>
 
                     {/* Email Field */}
                     <div className="space-y-1">
-                        <label htmlFor="email" className="text-sm font-medium text-text-primary ml-1 font-sans">Email</label>
+                        <label htmlFor="contact-email" className="text-sm font-medium text-text-primary ml-1 font-sans">Email</label>
                         <input 
                             type="email" 
                             name="email" 
                             required 
                             placeholder="ollie@example.com"
+                            id="contact-email"
                             className="w-full bg-surface-hover border border-border-color rounded-xl px-4 py-3 text-text-primary focus:outline-none focus:border-accent-primary transition-colors font-sans placeholder:text-text-muted/50"
                         />
                     </div>
 
                     {/* Message Field */}
                     <div className="space-y-1">
-                        <label htmlFor="message" className="text-sm font-medium text-text-primary ml-1 font-sans">Message</label>
+                        <label htmlFor="contact-message" className="text-sm font-medium text-text-primary ml-1 font-sans">Message</label>
                         <textarea 
                             name="message" 
                             required 
                             rows={4}
                             placeholder="How can I help?"
+                            id="contact-message"
                             className="w-full bg-surface-hover border border-border-color rounded-xl px-4 py-3 text-text-primary focus:outline-none focus:border-accent-primary transition-colors font-sans resize-none placeholder:text-text-muted/50"
                         ></textarea>
                     </div>

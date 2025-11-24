@@ -11,10 +11,11 @@ export default function Navbar() {
 
   return (
     <>
-      <motion.div 
+      <motion.nav 
         initial={{ y: -100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ delay: 1 }}
+        aria-label="Primary"
         className="fixed top-6 left-0 right-0 z-50 flex justify-center pointer-events-none px-4"
       >
         <div className="pointer-events-auto relative bg-surface/80 backdrop-blur-md border border-border-color rounded-full shadow-xl p-1.5">
@@ -39,7 +40,8 @@ export default function Navbar() {
             
             <button 
               onClick={() => setIsContactOpen(true)}
-              className="ml-1 px-4 py-2 text-sm font-medium bg-text-primary text-bg-depth rounded-full hover:scale-105 transition-transform font-sans whitespace-nowrap"
+              type="button"
+              className="ml-1 px-4 py-2 text-sm font-medium bg-text-primary text-bg-depth rounded-full hover:scale-105 transition-transform font-sans whitespace-nowrap focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-text-primary"
             >
               Let's Talk
             </button>
@@ -51,8 +53,11 @@ export default function Navbar() {
             {/* Mobile Menu Button */}
             <button 
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="p-2 bg-surface border border-border-color rounded-full text-text-primary hover:bg-surface-hover transition-colors"
-              aria-label="Menu"
+              className="p-2 bg-surface border border-border-color rounded-full text-text-primary hover:bg-surface-hover transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-text-primary"
+              aria-label="Toggle navigation menu"
+              aria-expanded={isMobileMenuOpen}
+              aria-controls="mobile-nav-links"
+              type="button"
             >
               {isMobileMenuOpen ? <X size={18} /> : <Menu size={18} />}
             </button>
@@ -66,7 +71,8 @@ export default function Navbar() {
             {/* Let's Talk (Always Visible) */}
             <button 
               onClick={() => setIsContactOpen(true)}
-              className="px-4 py-2 text-sm font-medium bg-text-primary text-bg-depth rounded-full font-sans whitespace-nowrap active:scale-95 transition-transform"
+              type="button"
+              className="px-4 py-2 text-sm font-medium bg-text-primary text-bg-depth rounded-full font-sans whitespace-nowrap active:scale-95 transition-transform focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-text-primary"
             >
               Let's Talk
             </button>
@@ -79,6 +85,7 @@ export default function Navbar() {
                 initial={{ opacity: 0, y: -10, scale: 0.95 }}
                 animate={{ opacity: 1, y: 0, scale: 1 }}
                 exit={{ opacity: 0, y: -10, scale: 0.95 }}
+                id="mobile-nav-links"
                 className="absolute top-full left-0 right-0 mt-2 p-2 bg-surface border border-border-color rounded-2xl shadow-xl flex flex-col gap-1 overflow-hidden md:hidden"
               >
                 {data.nav.map((item) => (
@@ -96,7 +103,7 @@ export default function Navbar() {
           </AnimatePresence>
 
         </div>
-      </motion.div>
+      </motion.nav>
 
       {/* The Contact Modal */}
       <ContactModal isOpen={isContactOpen} onClose={() => setIsContactOpen(false)} />

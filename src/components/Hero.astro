@@ -2,7 +2,7 @@
 import HeroText from './HeroText';
 import HeroBackground from './HeroBackground';
 ---
-<section class="relative w-full min-h-[85vh] flex items-center justify-center px-6 pt-32 md:pt-40 pb-12 overflow-hidden">
+<section class="relative w-full min-h-[85vh] flex items-center justify-center px-6 pt-32 md:pt-40 pb-12 overflow-hidden" aria-labelledby="hero-heading">
   
   <HeroBackground client:load />
 
@@ -33,7 +33,7 @@ import HeroBackground from './HeroBackground';
             style="background: radial-gradient(closest-side, rgba(26,26,26,1) 60%, rgba(26,26,26,0) 100%);"
         ></div>
         
-        <HeroText client:load />
+        <HeroText client:load headingId="hero-heading" />
     </div>
 
   </div>

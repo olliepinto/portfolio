@@ -60,3 +60,14 @@
     -ms-overflow-style: none;
     scrollbar-width: none;
 }
+
+/* ADD THIS: The Nuclear Anti-Flicker Fix */
+.flicker-fix {
+-webkit-backface-visibility: hidden;
+backface-visibility: hidden;
+transform: translate3d(0, 0, 0);
+-webkit-transform: translate3d(0, 0, 0);
+-webkit-perspective: 1000;
+perspective: 1000;
+will-change: transform, opacity;
+}

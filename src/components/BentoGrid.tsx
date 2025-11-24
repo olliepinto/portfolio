@@ -7,11 +7,10 @@ const Card = ({ className, children, delay }: any) => (
   <motion.div
     initial={{ opacity: 0, y: 20 }}
     whileInView={{ opacity: 1, y: 0 }}
-    // FIX: 'once: true' stops the flickering on mobile scroll
     viewport={{ once: true, margin: "-50px" }}
     transition={{ duration: 0.5, delay }}
-    // FIX: 'will-change-transform' helps mobile performance
-    className={`bg-surface border border-border-color rounded-3xl p-6 shadow-sm hover:shadow-md transition-all will-change-transform ${className}`}
+    // FIX: Added 'flicker-fix' class here
+    className={`bg-surface border border-border-color rounded-3xl p-6 shadow-sm hover:shadow-md transition-all flicker-fix ${className}`}
   >
     {children}
   </motion.div>

@@ -18,10 +18,12 @@ export default function WorkGrid() {
           <motion.div 
             key={project.id}
             onClick={() => setSelectedProject(project)}
-            // FIX: Added 'flicker-fix' class here
-            className="bg-surface border border-border-color rounded-2xl p-8 cursor-pointer hover:shadow-lg hover:border-accent-secondary/30 transition-all group h-full flex flex-col flicker-fix"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            className="bg-surface border border-border-color rounded-2xl p-8 cursor-pointer hover:shadow-lg hover:border-accent-secondary/30 transition-all group h-full flex flex-col"
+            
+            // FIX: Added 'z: 0' to both states
+            initial={{ opacity: 0, y: 20, z: 0 }}
+            whileInView={{ opacity: 1, y: 0, z: 0 }}
+            
             viewport={{ once: true, margin: "-50px" }}
             transition={{ delay: index * 0.05 }}
           >

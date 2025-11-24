@@ -3,14 +3,15 @@ import { motion } from 'framer-motion';
 import { MapPin, User, Zap, GraduationCap, Clapperboard, Smile, ExternalLink } from 'lucide-react';
 import data from '../data/portfolio.json';
 
-// FIX: Added 'z: 0' to both states to force permanent GPU rendering
+// FIX: Removed 'transition-all' which conflicts with Framer Motion.
+// Replaced with specific 'transition-colors transition-shadow' so CSS doesn't fight the JS animation.
 const Card = ({ className, children, delay }: any) => (
   <motion.div
-    initial={{ opacity: 0, y: 20, z: 0 }}
-    whileInView={{ opacity: 1, y: 0, z: 0 }}
+    initial={{ opacity: 0, y: 20 }}
+    whileInView={{ opacity: 1, y: 0 }}
     viewport={{ once: true, margin: "-50px" }}
     transition={{ duration: 0.5, delay }}
-    className={`bg-surface border border-border-color rounded-3xl p-6 shadow-sm hover:shadow-md transition-all ${className}`}
+    className={`bg-surface border border-border-color rounded-3xl p-6 shadow-sm hover:shadow-md transition-colors transition-shadow duration-300 flicker-fix ${className}`}
   >
     {children}
   </motion.div>
@@ -40,7 +41,7 @@ export default function BentoGrid() {
         {/* 1. Profile Card */}
         <Card className="md:col-span-2 flex flex-col justify-between h-full" delay={0.1}>
            <div className="flex justify-between items-start mb-4">
-             <div className="p-3 bg-surface-hover border border-border-color rounded-full w-fit"><User size={24} className="text-accent-primary" /></div>
+             <div className="p-3 bg-surface-hover border border-border-color rounded-full w-fit"><User size={24} className="text-accent-secondary" /></div>
              <div className="flex items-center gap-2 px-3 py-1 bg-surface-hover border border-border-color rounded-full">
                 <MapPin size={12} className="text-accent-secondary" />
                 <span className="text-xs font-medium text-text-muted lowercase font-sans">london, uk</span>

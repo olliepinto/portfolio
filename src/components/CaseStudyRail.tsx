@@ -18,9 +18,10 @@ export default function WorkGrid() {
           <motion.div 
             key={project.id}
             onClick={() => setSelectedProject(project)}
-            className="bg-surface border border-border-color rounded-2xl p-8 cursor-pointer hover:shadow-lg hover:border-accent-secondary/30 transition-all group h-full flex flex-col"
+            // FIX: Removed 'transition-all'. Added 'transition-colors transition-shadow'.
+            className="bg-surface border border-border-color rounded-2xl p-8 cursor-pointer hover:shadow-lg hover:border-accent-secondary/30 transition-colors transition-shadow duration-300 group h-full flex flex-col flicker-fix"
             
-            // FIX: Added 'z: 0' to both states
+            // NOTE: We kept 'z:0' from previous fix as it is still good practice for GPU locking
             initial={{ opacity: 0, y: 20, z: 0 }}
             whileInView={{ opacity: 1, y: 0, z: 0 }}
             

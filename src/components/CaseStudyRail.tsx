@@ -9,7 +9,6 @@ export default function WorkGrid() {
   return (
     <section id="work" className="w-full py-24 border-t border-border-color bg-surface/30">
       <div className="max-w-[1280px] mx-auto px-6 mb-12">
-         {/* Main Section Heading remains standard */}
          <h2 className="text-3xl md:text-5xl font-serif font-normal tracking-wide mb-2 text-text-primary">{data.work.headline}</h2>
          <p className="text-text-muted font-sans">{data.work.subheadline}</p>
       </div>
@@ -19,10 +18,11 @@ export default function WorkGrid() {
           <motion.div 
             key={project.id}
             onClick={() => setSelectedProject(project)}
-            // FIX: changed hover:border-accent-primary to hover:border-accent-secondary (Orange)
-            className="bg-surface border border-border-color rounded-2xl p-8 cursor-pointer hover:shadow-lg hover:border-accent-secondary/30 transition-all group h-full flex flex-col"
+            className="bg-surface border border-border-color rounded-2xl p-8 cursor-pointer hover:shadow-lg hover:border-accent-secondary/30 transition-all group h-full flex flex-col will-change-transform"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
+            // FIX: 'once: true' prevents flickering
+            viewport={{ once: true, margin: "-50px" }}
             transition={{ delay: index * 0.05 }}
           >
             <div className="flex justify-between items-start mb-6">
@@ -31,11 +31,9 @@ export default function WorkGrid() {
                     <span key={tag} className="text-[10px] font-medium px-2 py-1 rounded-full bg-surface-hover text-text-muted border border-border-color lowercase font-sans">{tag}</span>
                   ))}
                </div>
-               {/* FIX: Arrow icon turns Orange on hover */}
                <ArrowUpRight className="text-text-muted opacity-50 group-hover:text-accent-secondary group-hover:opacity-100 transition-all" />
             </div>
             
-            {/* FIX: Title turns Orange on hover */}
             <h3 className="text-2xl font-sans font-bold mb-2 text-text-primary group-hover:text-accent-secondary transition-colors">{project.client}</h3>
             
             <p className="text-sm font-medium text-text-muted mb-4 font-sans">{project.role}</p>
@@ -76,7 +74,6 @@ export default function WorkGrid() {
               
               <h2 className="text-3xl md:text-4xl font-sans font-bold mb-2 text-text-primary">{selectedProject.client}</h2>
               
-              {/* FIX: Role Title is now Orange (accent-secondary) */}
               <h3 className="text-xl text-accent-secondary font-medium mb-8 font-sans">{selectedProject.role}</h3>
 
               <div className="space-y-6">

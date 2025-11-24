@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Menu, X } from 'lucide-react';
 import data from '../data/portfolio.json';
 import ThemeToggle from './ThemeToggle';
 import ContactModal from './ContactModal';
 
 export default function Navbar() {
   const [isContactOpen, setIsContactOpen] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   return (
     <>
@@ -13,31 +15,86 @@ export default function Navbar() {
         initial={{ y: -100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ delay: 1 }}
-        className="fixed top-6 left-0 right-0 z-50 flex justify-center pointer-events-none"
+        className="fixed top-6 left-0 right-0 z-50 flex justify-center pointer-events-none px-4"
       >
-        <div className="flex items-center gap-2 p-1 bg-surface/80 backdrop-blur-md border border-border-color rounded-full shadow-xl pointer-events-auto">
-          <div className="flex gap-1">
-            {data.nav.map((item) => (
-              <a
-                key={item.label}
-                href={item.href}
-                className="px-4 py-2 text-sm font-medium text-text-muted hover:text-text-primary hover:bg-surface-hover rounded-full transition-all font-sans"
-              >
-                {item.label}
-              </a>
-            ))}
+        <div className="pointer-events-auto relative bg-surface/80 backdrop-blur-md border border-border-color rounded-full shadow-xl p-1.5">
+          
+          {/* 1. DESKTOP LAYOUT (Hidden on Mobile) */}
+          <div className="hidden md:flex items-center gap-2">
+            <div className="flex gap-1">
+              {data.nav.map((item) => (
+                <a
+                  key={item.label}
+                  href={item.href}
+                  className="px-4 py-2 text-sm font-medium text-text-muted hover:text-text-primary hover:bg-surface-hover rounded-full transition-all font-sans"
+                >
+                  {item.label}
+                </a>
+              ))}
+            </div>
+            
+            <div className="w-px h-6 bg-border-color mx-1"></div>
+            
+            <ThemeToggle />
+            
+            <button 
+              onClick={() => setIsContactOpen(true)}
+              className="ml-1 px-4 py-2 text-sm font-medium bg-text-primary text-bg-depth rounded-full hover:scale-105 transition-transform font-sans whitespace-nowrap"
+            >
+              Let's Talk
+            </button>
           </div>
-          
-          <div className="w-px h-6 bg-border-color mx-1"></div>
-          
-          <ThemeToggle />
-          
-          <button 
-            onClick={() => setIsContactOpen(true)}
-            className="ml-1 px-4 py-2 text-sm font-medium bg-text-primary text-bg-depth rounded-full hover:scale-105 transition-transform font-sans"
-          >
-            Let's Talk
-          </button>
+
+          {/* 2. MOBILE LAYOUT (Visible on Mobile) */}
+          <div className="flex md:hidden items-center justify-between gap-2">
+            
+            {/* Mobile Menu Button */}
+            <button 
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              className="p-2 bg-surface border border-border-color rounded-full text-text-primary hover:bg-surface-hover transition-colors"
+              aria-label="Menu"
+            >
+              {isMobileMenuOpen ? <X size={18} /> : <Menu size={18} />}
+            </button>
+
+            {/* Spacer */}
+            <div className="w-px h-6 bg-border-color mx-1"></div>
+
+            {/* Theme Toggle */}
+            <ThemeToggle />
+
+            {/* Let's Talk (Always Visible) */}
+            <button 
+              onClick={() => setIsContactOpen(true)}
+              className="px-4 py-2 text-sm font-medium bg-text-primary text-bg-depth rounded-full font-sans whitespace-nowrap active:scale-95 transition-transform"
+            >
+              Let's Talk
+            </button>
+          </div>
+
+          {/* 3. MOBILE MENU DROPDOWN */}
+          <AnimatePresence>
+            {isMobileMenuOpen && (
+              <motion.div
+                initial={{ opacity: 0, y: -10, scale: 0.95 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                exit={{ opacity: 0, y: -10, scale: 0.95 }}
+                className="absolute top-full left-0 right-0 mt-2 p-2 bg-surface border border-border-color rounded-2xl shadow-xl flex flex-col gap-1 overflow-hidden md:hidden"
+              >
+                {data.nav.map((item) => (
+                  <a
+                    key={item.label}
+                    href={item.href}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className="px-4 py-3 text-sm font-medium text-text-primary hover:bg-surface-hover rounded-xl transition-colors font-sans text-center"
+                  >
+                    {item.label}
+                  </a>
+                ))}
+              </motion.div>
+            )}
+          </AnimatePresence>
+
         </div>
       </motion.div>
 

@@ -7,15 +7,16 @@ const Card = ({ className, children, delay }: any) => (
   <motion.div
     initial={{ opacity: 0, y: 20 }}
     whileInView={{ opacity: 1, y: 0 }}
-    viewport={{ once: true }}
+    // FIX: 'once: true' stops the flickering on mobile scroll
+    viewport={{ once: true, margin: "-50px" }}
     transition={{ duration: 0.5, delay }}
-    className={`bg-surface border border-border-color rounded-3xl p-6 shadow-sm hover:shadow-md transition-all ${className}`}
+    // FIX: 'will-change-transform' helps mobile performance
+    className={`bg-surface border border-border-color rounded-3xl p-6 shadow-sm hover:shadow-md transition-all will-change-transform ${className}`}
   >
     {children}
   </motion.div>
 );
 
-// RESTORED: The Blue/Emerald/Orange logic for pills
 const getPillStyle = (color: string) => {
   switch(color) {
     case 'blue': return 'bg-blue-50 text-blue-600 border-blue-100 dark:bg-blue-900/20 dark:text-blue-300 dark:border-blue-800';
@@ -40,7 +41,6 @@ export default function BentoGrid() {
         {/* 1. Profile Card */}
         <Card className="md:col-span-2 flex flex-col justify-between h-full" delay={0.1}>
            <div className="flex justify-between items-start mb-4">
-             {/* Icon: Accent Secondary (Terracotta) */}
              <div className="p-3 bg-surface-hover border border-border-color rounded-full w-fit"><User size={24} className="text-accent-secondary" /></div>
              <div className="flex items-center gap-2 px-3 py-1 bg-surface-hover border border-border-color rounded-full">
                 <MapPin size={12} className="text-accent-secondary" />
@@ -48,7 +48,6 @@ export default function BentoGrid() {
              </div>
            </div>
            <div>
-              {/* FIX: Added 'font-sans' to override global serif rule */}
               <h3 className="text-3xl font-bold mb-2 text-text-primary font-sans">{profile?.content.title}</h3>
               <p className="text-text-muted font-medium font-sans text-lg">{profile?.content.role}</p>
               <p className="mt-4 text-sm text-text-muted opacity-80 leading-relaxed font-sans max-w-lg">{profile?.content.bio}</p>
@@ -60,14 +59,12 @@ export default function BentoGrid() {
            <div className="flex items-center gap-3 mb-4">
              <Smile size={24} className="text-accent-secondary" />
            </div>
-           {/* FIX: Added 'font-sans' */}
            <h4 className="text-lg font-bold text-text-primary mb-2 font-sans">{interests?.content.title}</h4>
            <p className="text-xs text-text-muted leading-relaxed font-sans">{interests?.content.text}</p>
         </Card>
 
         {/* 3. Toolkit */}
         <Card className="md:col-span-3" delay={0.3}>
-          {/* FIX: Added 'font-sans' */}
           <h4 className="text-sm font-bold text-text-primary mb-6 lowercase font-sans">{toolkit?.content.title}</h4>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {toolkit?.content.categories.map((cat: any) => (
@@ -75,7 +72,6 @@ export default function BentoGrid() {
                 <h5 className="text-sm font-bold text-text-muted mb-3 lowercase font-sans">{cat.name}</h5>
                 <div className="flex flex-wrap gap-2">
                   {cat.items.map((item: string) => (
-                    // RESTORED: Using color pills
                     <span key={item} className={`px-3 py-1 text-xs font-medium border rounded-full lowercase transition-colors font-sans ${getPillStyle(cat.color)}`}>
                       {item}
                     </span>
@@ -90,7 +86,6 @@ export default function BentoGrid() {
         <Card className="md:col-span-2" delay={0.4}>
            <div className="flex items-center gap-3 mb-4">
              <Clapperboard size={20} className="text-accent-secondary" />
-             {/* FIX: Added 'font-sans' */}
              <h4 className="text-lg font-bold text-text-primary font-sans">{creative?.content.title}</h4>
            </div>
            <p className="text-sm text-text-muted leading-relaxed font-sans">{creative?.content.text}</p>
@@ -101,7 +96,6 @@ export default function BentoGrid() {
            <div className="p-3 bg-surface-hover border border-border-color rounded-full mb-4">
              <GraduationCap size={24} className="text-accent-secondary" />
            </div>
-           {/* FIX: Added 'font-sans' */}
            <h4 className="text-lg font-bold text-text-primary leading-tight mb-1 font-sans">{university?.content.degree}</h4>
            
            <span className="text-xs font-medium text-accent-secondary mb-4 lowercase font-sans bg-accent-primary/20 px-2 py-0.5 rounded-full">
@@ -119,7 +113,6 @@ export default function BentoGrid() {
               </div>
               <div>
                 <p className="text-xs font-medium text-accent-secondary mb-0.5 lowercase font-sans">{substack?.content.label}</p>
-                {/* FIX: Added 'font-sans' */}
                 <h4 className="text-lg font-bold text-text-primary font-sans">{substack?.content.title}</h4>
               </div>
            </div>

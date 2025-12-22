@@ -4,6 +4,7 @@ import { X, Send, CheckCircle, Loader2 } from 'lucide-react';
 
 export default function ContactModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) {
   const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const dialogRef = useRef<HTMLDivElement>(null);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
 
@@ -52,33 +53,51 @@ export default function ContactModal({ isOpen, onClose }: { isOpen: boolean; onC
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setStatus('submitting');
+    setErrorMessage(null);
 
-    const formData = new FormData(e.currentTarget);
-    
-    // -----------------------------------------------------------
-    // 🔴 IMPORTANT: PASTE YOUR WEB3FORMS ACCESS KEY HERE
-    // -----------------------------------------------------------
-    formData.append("access_key", "3e4110a1-ca59-4cba-b23c-794298b65658"); 
+    const form = e.currentTarget;
+    const formData = new FormData(form);
+    const accessKey = import.meta.env.PUBLIC_WEB3FORMS_ACCESS_KEY as string | undefined;
+
+    if (!accessKey) {
+      setStatus('error');
+      setErrorMessage('Missing contact form key. Please try again later.');
+      return;
+    }
+
+    const honeypot = String(formData.get('company') || '');
+    if (honeypot) {
+      setStatus('error');
+      setErrorMessage('Spam detected.');
+      return;
+    }
+
+    formData.append('access_key', accessKey);
+    formData.append('subject', `Portfolio contact from ${String(formData.get('name') || '').trim()}`);
 
     try {
-      const response = await fetch("https://api.web3forms.com/submit", {
-        method: "POST",
-        body: formData
+      const response = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        body: formData,
       });
 
-      const data = await response.json();
+      const responseType = response.headers.get('content-type') ?? '';
+      const isJson = responseType.includes('application/json');
+      const data = isJson ? await response.json().catch(() => null) : null;
 
-      if (data.success) {
-        setStatus('success');
-        setTimeout(() => {
-          onClose();
-          setStatus('idle'); // Reset form for next time
-        }, 3000);
-      } else {
-        setStatus('error');
+      if (!response.ok || !data?.success) {
+        throw new Error(data?.message ?? 'Unable to send message right now.');
       }
+
+      setStatus('success');
+      form.reset();
+      setTimeout(() => {
+        onClose();
+        setStatus('idle'); // Reset form for next time
+      }, 3000);
     } catch (err) {
       setStatus('error');
+      setErrorMessage(err instanceof Error ? err.message : 'Something went wrong. Please try again.');
     }
   };
 
@@ -136,7 +155,18 @@ export default function ContactModal({ isOpen, onClose }: { isOpen: boolean; onC
                 </div>
             ) : (
                 /* The Form: Clean & Human */
-                <form onSubmit={handleSubmit} className="space-y-4">
+                <form onSubmit={handleSubmit} className="space-y-4" noValidate>
+                    {/* Honeypot Field */}
+                    <div className="sr-only" aria-hidden="true">
+                        <label htmlFor="contact-company">Company</label>
+                        <input
+                            id="contact-company"
+                            name="company"
+                            type="text"
+                            tabIndex={-1}
+                            autoComplete="off"
+                        />
+                    </div>
                     
                     {/* Name Field */}
                     <div className="space-y-1">
@@ -147,6 +177,7 @@ export default function ContactModal({ isOpen, onClose }: { isOpen: boolean; onC
                             required 
                             placeholder="What should I call you?"
                             id="contact-name"
+                            autoComplete="name"
                             className="w-full bg-surface-hover border border-border-color rounded-xl px-4 py-3 text-text-primary focus:outline-none focus:border-accent-primary transition-colors font-sans placeholder:text-text-muted/50"
                         />
                     </div>
@@ -160,6 +191,7 @@ export default function ContactModal({ isOpen, onClose }: { isOpen: boolean; onC
                             required 
                             placeholder="ollie@example.com"
                             id="contact-email"
+                            autoComplete="email"
                             className="w-full bg-surface-hover border border-border-color rounded-xl px-4 py-3 text-text-primary focus:outline-none focus:border-accent-primary transition-colors font-sans placeholder:text-text-muted/50"
                         />
                     </div>
@@ -189,10 +221,15 @@ export default function ContactModal({ isOpen, onClose }: { isOpen: boolean; onC
                             <><Send size={18} /> Send Message</>
                         )}
                     </button>
-
-                    {status === 'error' && (
-                        <p className="text-xs text-red-500 text-center font-sans mt-2">Something went wrong. Please try again.</p>
-                    )}
+                    <p 
+                        role="status" 
+                        aria-live="polite" 
+                        className="text-xs text-center font-sans mt-2 min-h-[1.25rem]"
+                    >
+                        {status === 'error' && (
+                            <span className="text-red-500">{errorMessage ?? 'Something went wrong. Please try again.'}</span>
+                        )}
+                    </p>
                 </form>
             )}
 

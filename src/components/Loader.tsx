@@ -7,9 +7,22 @@ export default function Loader() {
   const [isLoading, setIsLoading] = useState(true);
   const [count, setCount] = useState(0);
   const [wordIndex, setWordIndex] = useState(0);
+  const [viewportHeight, setViewportHeight] = useState<number | null>(null);
 
   useEffect(() => {
     document.body.style.overflow = 'hidden';
+
+    const updateViewportHeight = () => {
+      const height = window.visualViewport?.height ?? window.innerHeight;
+      setViewportHeight(Math.round(height));
+    };
+
+    updateViewportHeight();
+
+    const visualViewport = window.visualViewport;
+    visualViewport?.addEventListener('resize', updateViewportHeight);
+    visualViewport?.addEventListener('scroll', updateViewportHeight);
+    window.addEventListener('resize', updateViewportHeight);
 
     const counterInterval = setInterval(() => {
       setCount((prev) => {
@@ -39,22 +52,34 @@ export default function Loader() {
       clearInterval(counterInterval);
       clearInterval(wordInterval);
       clearTimeout(timeout);
+      visualViewport?.removeEventListener('resize', updateViewportHeight);
+      visualViewport?.removeEventListener('scroll', updateViewportHeight);
+      window.removeEventListener('resize', updateViewportHeight);
       document.body.style.overflow = 'auto';
     };
   }, []);
+
+  const loaderVariants = {
+    exit: (height: number | null) => ({
+      y: height ? -height : '-100%',
+      transition: { duration: 0.8, ease: [0.76, 0, 0.24, 1] },
+    }),
+  };
 
   return (
     <AnimatePresence>
       {isLoading && (
         <motion.div
           initial={{ opacity: 1 }}
-          exit={{ y: "-100%", transition: { duration: 0.8, ease: [0.76, 0, 0.24, 1] } }}
+          exit="exit"
+          variants={loaderVariants}
+          custom={viewportHeight}
           role="status"
           aria-live="polite"
           aria-label="Site loading"
-          className="fixed left-0 right-0 top-0 z-[999] flex flex-col items-center justify-center bg-bg-depth text-text-primary px-4"
+          className="fixed left-0 top-0 z-[999] flex w-screen flex-col items-center justify-center bg-bg-depth text-text-primary px-4"
           style={{
-            bottom: 'calc(-1 * env(safe-area-inset-bottom))',
+            height: viewportHeight ? `${viewportHeight}px` : '100vh',
             paddingBottom: 'env(safe-area-inset-bottom)',
             paddingTop: 'env(safe-area-inset-top)',
           }}

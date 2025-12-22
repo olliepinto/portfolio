@@ -68,7 +68,7 @@ export default function ContactModal({ isOpen, onClose }: { isOpen: boolean; onC
     const honeypot = String(formData.get('company') || '');
     if (honeypot) {
       setStatus('error');
-      setErrorMessage('Spam detected.');
+      setErrorMessage('This looks like spam. Please try again.');
       return;
     }
 
@@ -140,7 +140,7 @@ export default function ContactModal({ isOpen, onClose }: { isOpen: boolean; onC
                 <h2 id="contact-modal-title" className="text-3xl font-serif font-normal text-text-primary mb-2">Let's Chat</h2>
                 {/* Poppins for the friendly subtext */}
                 <p id="contact-modal-description" className="text-text-muted font-sans text-sm leading-relaxed">
-                  Got a project in mind, or just want to say hi? I'm always open to discussing new ideas.
+                  Got a project in mind, or just want to say hello? I'm always up for a conversation.
                 </p>
             </div>
 
@@ -151,7 +151,7 @@ export default function ContactModal({ isOpen, onClose }: { isOpen: boolean; onC
                         <CheckCircle size={32} />
                     </div>
                     <h3 className="text-xl font-sans font-bold text-text-primary">Message Sent!</h3>
-                    <p className="text-text-muted font-sans">Thanks for reaching out. I'll get back to you shortly.</p>
+                    <p className="text-text-muted font-sans">Thanks for reaching out. I'll be in touch soon.</p>
                 </div>
             ) : (
                 /* The Form: Clean & Human */
@@ -175,7 +175,7 @@ export default function ContactModal({ isOpen, onClose }: { isOpen: boolean; onC
                             type="text" 
                             name="name" 
                             required 
-                            placeholder="What should I call you?"
+                            placeholder="Your name"
                             id="contact-name"
                             autoComplete="name"
                             className="w-full bg-surface-hover border border-border-color rounded-xl px-4 py-3 text-text-primary focus:outline-none focus:border-accent-primary transition-colors font-sans placeholder:text-text-muted/50"
@@ -189,7 +189,7 @@ export default function ContactModal({ isOpen, onClose }: { isOpen: boolean; onC
                             type="email" 
                             name="email" 
                             required 
-                            placeholder="ollie@example.com"
+                            placeholder="you@example.com"
                             id="contact-email"
                             autoComplete="email"
                             className="w-full bg-surface-hover border border-border-color rounded-xl px-4 py-3 text-text-primary focus:outline-none focus:border-accent-primary transition-colors font-sans placeholder:text-text-muted/50"
@@ -203,7 +203,7 @@ export default function ContactModal({ isOpen, onClose }: { isOpen: boolean; onC
                             name="message" 
                             required 
                             rows={4}
-                            placeholder="How can I help?"
+                            placeholder="What's on your mind?"
                             id="contact-message"
                             className="w-full bg-surface-hover border border-border-color rounded-xl px-4 py-3 text-text-primary focus:outline-none focus:border-accent-primary transition-colors font-sans resize-none placeholder:text-text-muted/50"
                         ></textarea>

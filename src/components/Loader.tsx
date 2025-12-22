@@ -67,7 +67,7 @@ export default function Loader() {
             
             {/* Top Bar */}
             <div className="flex justify-between items-end mb-4 font-sans text-xs text-text-muted uppercase tracking-widest">
-              <span>System Initializing...</span>
+              <span>Loading...</span>
               <span>{count}%</span>
             </div>
 

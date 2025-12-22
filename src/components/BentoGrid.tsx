@@ -114,6 +114,9 @@ export default function BentoGrid() {
               <div>
                 <p className="text-xs font-medium text-accent-secondary mb-0.5 lowercase font-sans">{substack?.content.label}</p>
                 <h4 className="text-lg font-bold text-text-primary font-sans">{substack?.content.title}</h4>
+                {substack?.content.description && (
+                  <p className="text-sm text-text-muted font-sans mt-1">{substack?.content.description}</p>
+                )}
               </div>
            </div>
            <a 

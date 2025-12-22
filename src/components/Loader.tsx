@@ -52,7 +52,8 @@ export default function Loader() {
           role="status"
           aria-live="polite"
           aria-label="Site loading"
-          className="fixed inset-0 z-[999] flex flex-col items-center justify-center bg-bg-depth text-text-primary px-4"
+          className="fixed inset-0 z-[999] flex min-h-[100svh] flex-col items-center justify-center bg-bg-depth text-text-primary px-4"
+          style={{ paddingBottom: 'env(safe-area-inset-bottom)' }}
         >
           <div className="w-full max-w-md">
             

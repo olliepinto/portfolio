@@ -14,7 +14,25 @@ import '@fontsource/abril-fatface';
 
 const DEFAULT_DESCRIPTION = "Full-stack marketer blending creative strategy and marketing operations to build scalable systems and standout campaigns.";
 const DEFAULT_OG_IMAGE = "/assets/og-image.png";
-const { title, description = DEFAULT_DESCRIPTION, canonicalUrl, ogImage = DEFAULT_OG_IMAGE } = Astro.props;
+const {
+	title,
+	description = DEFAULT_DESCRIPTION,
+	canonicalUrl,
+	ogImage = DEFAULT_OG_IMAGE,
+	robots = "index, follow",
+} = Astro.props;
+
+const canonical =
+	canonicalUrl ?? (Astro.site ? new URL(Astro.url.pathname, Astro.site).href : undefined);
+
+const personSchema = {
+	"@context": "https://schema.org",
+	"@type": "Person",
+	name: "Ollie Pinto",
+	jobTitle: "Full-stack marketer",
+	url: canonical ?? "https://www.olliepinto.com/",
+	sameAs: ["https://olliepinto.substack.com/"],
+};
 ---
 <!doctype html>
 <html lang="en" class="scroll-smooth">
@@ -22,9 +40,13 @@ const { title, description = DEFAULT_DESCRIPTION, canonicalUrl, ogImage = DEFAUL
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 		<meta name="description" content={description} />
+		<meta name="robots" content={robots} />
 		<meta property="og:title" content={title} />
 		<meta property="og:description" content={description} />
 		<meta property="og:type" content="website" />
+		{canonical && <meta property="og:url" content={canonical} />}
+		<meta property="og:site_name" content="Ollie Pinto" />
+		<meta property="og:locale" content="en_GB" />
 		<meta property="og:image" content={ogImage} />
 		<meta property="og:image:alt" content="Ollie Pinto portfolio preview" />
 		<meta property="twitter:image" content={ogImage} />
@@ -40,8 +62,9 @@ const { title, description = DEFAULT_DESCRIPTION, canonicalUrl, ogImage = DEFAUL
 		<link rel="icon" type="image/png" sizes="196x196" href="/assets/favicon-196x196.png" />
 		<link rel="icon" type="image/png" sizes="512x512" href="/assets/android-chrome-512x512.png" />
 		<meta name="msapplication-TileImage" content="/assets/mstile-310x310.png" />
-		{canonicalUrl && <link rel="canonical" href={canonicalUrl} />}
+		{canonical && <link rel="canonical" href={canonical} />}
 		<title>{title}</title>
+		<script type="application/ld+json">{JSON.stringify(personSchema)}</script>
         <script is:inline>
             // Only enable dark mode if the user explicitly chose it before.
             // Otherwise, force remove it (Light Mode Default).

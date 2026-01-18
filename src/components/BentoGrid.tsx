@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { MapPin, User, Zap, GraduationCap, Clapperboard, Smile, ExternalLink } from 'lucide-react';
+import { MapPin, User, Zap, GraduationCap, Clapperboard, Smile, ExternalLink, Linkedin } from 'lucide-react';
 import data from '../data/portfolio.json';
 
 // FIX: Removed 'transition-all' which conflicts with Framer Motion.
@@ -51,6 +51,22 @@ export default function BentoGrid() {
               <h3 className="text-3xl font-bold mb-2 text-text-primary font-sans">{profile?.content.title}</h3>
               <p className="text-text-muted font-medium font-sans text-lg">{profile?.content.role}</p>
               <p className="mt-4 text-sm text-text-muted opacity-80 leading-relaxed font-sans max-w-lg">{profile?.content.bio}</p>
+              {profile?.content.links?.length ? (
+                <div className="mt-5 flex flex-wrap gap-2">
+                  {profile.content.links.map((link: { label: string; url: string }) => (
+                    <a
+                      key={link.url}
+                      href={link.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 px-4 py-2 text-xs font-medium border rounded-full bg-surface-hover text-text-primary border-border-color hover:border-accent-secondary/40 transition-colors font-sans"
+                    >
+                      <Linkedin size={14} className="text-accent-secondary" />
+                      {link.label}
+                    </a>
+                  ))}
+                </div>
+              ) : null}
            </div>
         </Card>
 
@@ -66,7 +82,7 @@ export default function BentoGrid() {
         {/* 3. Toolkit */}
         <Card className="md:col-span-3" delay={0.3}>
           <h4 className="text-sm font-bold text-text-primary mb-6 lowercase font-sans">{toolkit?.content.title}</h4>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {toolkit?.content.categories.map((cat: any) => (
               <div key={cat.name}>
                 <h5 className="text-sm font-bold text-text-muted mb-3 lowercase font-sans">{cat.name}</h5>

@@ -67,7 +67,7 @@ export default function WorkGrid() {
             aria-haspopup="dialog"
             aria-controls="project-detail-dialog"
             aria-label={`View case study details for ${project.client}`}
-            className="bg-surface border border-border-color rounded-2xl p-8 cursor-pointer hover:shadow-lg hover:border-accent-secondary/30 transition-colors transition-shadow duration-300 group h-full flex flex-col flicker-fix text-left"
+            className={`bg-surface border border-border-color rounded-2xl p-8 cursor-pointer hover:shadow-lg hover:border-accent-secondary/30 transition-colors transition-shadow duration-300 group h-full flex flex-col flicker-fix text-left ${project.id === 'early-career' ? 'md:col-span-2 lg:col-span-3' : ''}`}
             
             // NOTE: We kept 'z:0' from previous fix as it is still good practice for GPU locking
             initial={{ opacity: 0, y: 20, z: 0 }}

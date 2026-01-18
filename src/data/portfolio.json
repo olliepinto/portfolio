@@ -2,7 +2,7 @@
   "hero": {
     "badge": "based in london",
     "headline": "Hi, I'm Ollie.",
-    "subheadline": "I'm a full-stack marketer who builds the systems, content and automations that help teams scale without burning out.",
+    "subheadline": "Senior B2B marketer with a creative-technical foundation in video, design, and UX. I build AI-powered marketing systems, workflow automation, and content strategies that drive pipeline efficiency and measurable growth.",
     "ctaPrimary": "View My Work",
     "ctaSecondary": "Get to Know Me"
   },
@@ -17,7 +17,13 @@
       "content": {
         "title": "Ollie Pinto",
         "role": "Full-Stack Marketer",
-        "bio": "Creative meets systems. I help marketing teams run smoothly, so there's less firefighting and more room for strategy."
+        "bio": "Creative meets systems. I help marketing teams run smoothly, so there's less firefighting and more room for strategy.",
+        "links": [
+          {
+            "label": "LinkedIn",
+            "url": "https://www.linkedin.com/in/oliver-pinto/"
+          }
+        ]
       }
     },
     {
@@ -26,19 +32,24 @@
         "title": "Toolkit",
         "categories": [
           {
-            "name": "creative & technical",
-            "color": "blue",
-            "items": ["copywriting", "adobe cc", "figma", "ui/ux design", "wordpress", "framer", "webflow", "video & motion", "vibe coding"]
-          },
-          {
-            "name": "ops & automation",
-            "color": "emerald",
-            "items": ["python", "make.com", "n8n", "hubspot", "activecampaign", "process optimisation"]
-          },
-          {
-            "name": "strategy",
+            "name": "strategic marketing",
             "color": "orange",
-            "items": ["gtm strategy", "social strategy", "seo & analytics", "project management"]
+            "items": ["demand generation & pipeline marketing", "marketing automation & ai", "b2b campaign strategy", "brand positioning & messaging", "crm & lifecycle marketing", "seo & digital marketing"]
+          },
+          {
+            "name": "technical & automation",
+            "color": "emerald",
+            "items": ["ai-powered marketing tools", "workflow automation", "crm management", "marketing analytics", "web development"]
+          },
+          {
+            "name": "creative & content",
+            "color": "blue",
+            "items": ["content strategy & copywriting", "video production & motion design", "ui/ux design", "creative direction"]
+          },
+          {
+            "name": "tools",
+            "color": "slate",
+            "items": ["figma", "adobe cc", "hubspot", "activecampaign", "google analytics", "make.com", "n8n", "python", "wordpress", "framer", "cursor", "notion"]
           }
         ]
       }
@@ -47,7 +58,7 @@
       "id": "creative",
       "content": {
         "title": "Creative Background",
-        "text": "Started making YouTube videos in 2009. Built my career through video, then design, then UX, then into marketing, where I am today. Each chapter added to the toolkit. Now I use AI to go deeper into technical work I couldn't do alone."
+        "text": "Built a creative-technical foundation through video, motion, UI/UX, and brand work. Those skills now underpin how I build scalable marketing systems and creative campaign execution."
       }
     },
     {
@@ -56,7 +67,7 @@
         "degree": "BA (Hons) Media Production",
         "grade": "First Class Honours",
         "school": "Bournemouth University",
-        "desc": "Final project: Drops Music - a mobile app concept. Designed the UI, built an animated prototype, and directed video content to bring it to life."
+        "desc": "Final project: Drops Music, a mobile app concept. Designed the UI, built an animated prototype, and directed video content to bring it to life. Praised for innovative design and user experience."
       }
     },
     {
@@ -79,124 +90,67 @@
   ],
   "work": {
     "headline": "Experience Archive",
-    "subheadline": "A timeline of roles, projects, and the things I've shipped.",
+    "subheadline": "Recent roles and the early foundations that shaped how I build marketing systems.",
     "projects": [
       {
         "id": "walr",
         "client": "Walr",
         "role": "Senior Marketing Executive",
-        "period": "June 2024 to Present",
-        "tags": ["ops", "content", "automation"],
-        "short_desc": "Built automations and content systems that helped marketing scale.",
+        "period": "June 2024 - Present",
+        "tags": ["b2b", "automation", "ops"],
+        "short_desc": "Scaled LinkedIn performance, built AI lead qualification, and reduced CRM costs.",
         "full_desc": [
-            "Drove consistent YoY growth in social impressions and engagement. Shaped tone of voice, ran performance standups, and turned insights into optimisations, earning strong client feedback.",
-            "Built a multi-step lead triage automation: filters spam, generates AI-powered company summaries, scores leads against ICP, and routes qualified prospects to Slack in real time. Significantly reduced noise for the sales team.",
-            "Created custom AI tools for the marketing team, contextualised for ICP fit, tone of voice, and proposition alignment.",
-            "Managed WordPress CMS and implemented cost-saving CRM solutions for email marketing."
+            "Grew LinkedIn performance vs prior-year baseline: impressions +126%, engagements +268% (organic). Shaped tone of voice, ran performance standups, and turned insights into optimisations.",
+            "Designed and implemented an AI-powered lead qualification system (Make.com + OpenAI) that filters inbound leads, scores against ICP criteria, enriches company data, and routes qualified MQLs to sales. Reduced unqualified pipeline by 49%.",
+            "Built custom AI content tools that cut the brief-to-draft cycle by ~70% while keeping brand consistency and ICP alignment.",
+            "Led CRM evaluation and migration from a high-cost platform to an optimised solution. Delivered a 66% cost reduction (about GBP 5,800 annual savings) and improved deliverability and campaign tracking.",
+            "Collaborated with sales and product to align messaging with customer pain points, improving lead-to-opportunity conversion.",
+            "Managed WordPress CMS and implemented technical optimisations that improved site performance and user experience."
         ]
       },
       {
         "id": "guild",
         "client": "Guild Esports",
-        "role": "Marketing Executive",
-        "period": "June 2023 to June 2024",
-        "tags": ["strategy", "commercial", "campaign"],
-        "short_desc": "Helped secure $1.1m revenue for Sky Broadband Gaming Plan.",
+        "role": "Marketing Executive (previously Marketing Assistant)",
+        "period": "June 2023 - June 2024",
+        "tags": ["campaigns", "partnerships", "content"],
+        "short_desc": "Drove partnership campaigns and social growth for Sky Broadband Gaming Plan.",
         "full_desc": [
-            "Coordinated the new website build, writing copy and optimising SEO.",
-            "Developed B2B strategy, including investor newsletters and a LinkedIn content cadence.",
-            "Built a custom AI tone-of-voice tool to keep brand messaging consistent at scale.",
-            "Led social activity for the Sky partnership, contributing to 80.6m impressions."
+            "Supported marketing strategy that helped secure $1.1m revenue for the Sky Broadband Gaming Plan through campaign planning and cross-functional execution.",
+            "Led social media activity for the Sky partnership, contributing to 80.6m impressions across key gaming audiences.",
+            "Led website redesign initiative, owning copywriting and SEO strategy in collaboration with an external developer.",
+            "Developed B2B marketing strategy, including investor newsletters and LinkedIn content cadence.",
+            "Built a custom AI tone-of-voice tool to maintain brand messaging consistency at scale."
         ]
       },
       {
         "id": "triple",
         "client": "Triple Point",
         "role": "Marketing Assistant",
-        "period": "Jan 2022 to Apr 2023",
+        "period": "Jan 2022 - Apr 2023",
         "tags": ["b2b", "rebrand", "financial services"],
-        "short_desc": "Supported a major B2B rebrand for the Private Credit business line.",
+        "short_desc": "Supported a B2B rebrand and investor marketing for Private Credit.",
         "full_desc": [
-            "Played a key role in the B2B rebrand of the Private Credit business line.",
-            "Ran campaigns that increased investor engagement.",
-            "Managed suppliers for video, webinar, and presentation production.",
-            "Supported digital marketing: website UX/SEO improvements and LinkedIn campaign management."
+            "Contributed to the B2B rebrand of the Private Credit division, supporting brand positioning and campaign execution.",
+            "Executed campaigns that increased engagement with individual and institutional investors through targeted messaging and multi-channel distribution.",
+            "Managed external suppliers for video, webinar, and presentation production to ensure brand consistency and on-time delivery.",
+            "Supported digital marketing initiatives including website UX/SEO improvements and LinkedIn campaign management."
         ]
       },
       {
-        "id": "csl",
-        "client": "CSL Integration",
-        "role": "Projects Assistant",
-        "period": "May 2021 to Sep 2021",
-        "tags": ["operations", "procurement", "brand"],
-        "short_desc": "Streamlined procurement and refreshed brand assets for a rebrand.",
+        "id": "early-career",
+        "client": "Early Career & Creative Foundation",
+        "role": "Creative, Video, and Ops Roles",
+        "period": "2015 - 2021",
+        "tags": ["creative", "video", "ui/ux"],
+        "short_desc": "Built a creative-technical foundation across video, motion, UI/UX, and brand.",
         "full_desc": [
-            "Streamlined procurement workflows, including supplier liaison and invoice logging.",
-            "Updated brand templates ahead of a planned rebrand."
-        ]
-      },
-      {
-        "id": "baxter",
-        "client": "Baxter",
-        "role": "Motion Designer",
-        "period": "Feb 2020 to May 2020",
-        "tags": ["motion", "startup", "ui/ux"],
-        "short_desc": "Created animated prototypes for a fashion social commerce app.",
-        "full_desc": [
-            "Produced a promotional video and website showcase animation for the app.",
-            "Transformed static UI assets into animated prototypes using 2D and 3D motion software.",
-            "Delivered high-fidelity prototypes that strengthened the company's pitch to retailers and investors."
-        ]
-      },
-      {
-        "id": "decca",
-        "client": "Decca Records",
-        "role": "Intern",
-        "period": "Dec 2019",
-        "tags": ["music", "promotions"],
-        "short_desc": "Assisted the Promotions team at Universal Music Group record label.",
-        "full_desc": [
-            "Handled travel requisitions and department data entry.",
-            "Booked travel and assisted talent appearing on This Morning."
-        ]
-      },
-      {
-        "id": "vebu",
-        "client": "Vebu",
-        "role": "Creative",
-        "period": "July 2018 to Aug 2018",
-        "tags": ["agency", "seo", "video"],
-        "short_desc": "Improved SEO and produced creative assets for agency clients.",
-        "full_desc": [
-            "Delivered client work: corporate video editing, graphic design, motion graphics.",
-            "Wrote blog posts that improved SEO and channel discoverability.",
-            "Created a standardised SEO guide for the agency."
-        ]
-      },
-      {
-        "id": "freelance",
-        "client": "Freelance",
-        "role": "Video Editor & Designer",
-        "period": "Mar 2017 to June 2018",
-        "tags": ["youtube", "gaming", "content"],
-        "short_desc": "Produced gaming content, including videos with 100k+ views.",
-        "full_desc": [
-            "Managed a YouTube channel for a popular Twitch streamer.",
-            "Produced card reveal and instructional videos in association with Blizzard Entertainment.",
-            "Grew the channel to 10,000+ subscribers."
-        ]
-      },
-      {
-        "id": "sky",
-        "client": "Sky Creative",
-        "role": "Fast Forward Intern",
-        "period": "July 2015 to June 2016",
-        "tags": ["broadcast", "branding", "motion"],
-        "short_desc": "11-month rotation through creative departments, specialising in Brand Experience.",
-        "full_desc": [
-            "Rotated through creative departments, specialising in Brand Experience.",
-            "Contributed to internal branding for Game of Thrones S6, Sky Difference, and Sky Wilmslow.",
-            "Produced a broadcast promo for Z Nation (Pick TV) and created assets for Sky Sports."
+            "Sky: 11-month creative internship at Sky Creative, specialising in Brand Experience.",
+            "Vebu: creative role at Somerset House agency.",
+            "Baxter: motion designer for fashion tech startup.",
+            "J4CKIECHAN: YouTube channel manager; grew to 10k+ subscribers with videos reaching 100k+ views (Blizzard Entertainment partnership).",
+            "Decca Records: UMG promotions intern.",
+            "CSL Integration: projects assistant."
         ]
       }
     ]
@@ -217,9 +171,9 @@
         "desc": "A multi-step automation that filters spam, scores leads with AI, and routes qualified prospects to Slack in real time. Built to cut noise and speed up sales response."
       },
       {
-        "title": "Vibe Coding Architecture",
-        "tools": ["gemini", "astro", "react"],
-        "desc": "This portfolio is a live case study. I used Gemini to architect a modern tech stack, proof that non-coders can ship production-grade sites without drowning in boilerplate."
+        "title": "AI-Assisted Front-End Build",
+        "tools": ["cursor", "claude code", "astro", "react", "ide workflow"],
+        "desc": "A live case study in AI-assisted front-end development. I use tools like Cursor and Claude Code to ship clean, responsive interfaces while owning the architecture, build setup, and deployment."
       }
     ]
   },

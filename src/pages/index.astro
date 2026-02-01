@@ -3,6 +3,7 @@ import Layout from '../layouts/Layout.astro';
 import Loader from '../components/Loader'; // Import the Loader
 import Navbar from '../components/Navbar';
 import Hero from '../components/Hero.astro';
+import LogoSlider from '../components/LogoSlider.astro';
 import BentoGrid from '../components/BentoGrid';
 import WorkGrid from '../components/CaseStudyRail'; // Note: We renamed the component internally but file is still CaseStudyRail
 import LabSection from '../components/LabSection.astro';
@@ -19,6 +20,8 @@ import Footer from '../components/Footer.astro';
     <Navbar client:load />
 
     <Hero />
+
+    <LogoSlider />
 	
     <BentoGrid client:visible />
 	

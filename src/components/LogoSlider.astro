@@ -1,0 +1,343 @@
+---
+import data from '../data/portfolio.json';
+
+type LogoItem = { alt: string; lightSrc?: string; darkSrc?: string; src?: string };
+type RowCountConfig = { base?: number; md?: number; lg?: number };
+
+const defaultLogos: LogoItem[] = [
+  {
+    lightSrc: '/assets/guild-black.png',
+    darkSrc: '/assets/guild-white.png',
+    alt: 'Guild Esports'
+  },
+  {
+    lightSrc: '/assets/decca-black.png',
+    darkSrc: '/assets/decca-white.png',
+    alt: 'Decca Records'
+  },
+  {
+    lightSrc: '/assets/amazon-black.png',
+    darkSrc: '/assets/amazon-white.png',
+    alt: 'Amazon'
+  },
+  {
+    lightSrc: '/assets/blizzard-black.png',
+    darkSrc: '/assets/blizzard-white.png',
+    alt: 'Blizzard Entertainment'
+  },
+  {
+    lightSrc: '/assets/sky-black.png',
+    darkSrc: '/assets/sky-white.png',
+    alt: 'Sky'
+  },
+  {
+    lightSrc: '/assets/subway-black.png',
+    darkSrc: '/assets/subway-white.png',
+    alt: 'Subway'
+  },
+  {
+    lightSrc: '/assets/tp-black.png',
+    darkSrc: '/assets/tp-white.png',
+    alt: 'Triple Point'
+  },
+  {
+    lightSrc: '/assets/walr-black.png',
+    darkSrc: '/assets/walr-white.png',
+    alt: 'Walr'
+  }
+];
+
+const {
+  autoplay = true,
+  speed = 24000,
+  loop = true,
+  rowCount = 1,
+  logos = defaultLogos,
+  ariaLabel = data.logoSlider?.ariaLabel ?? 'Logo carousel'
+} = Astro.props;
+
+const normalizedRowCount: RowCountConfig =
+  typeof rowCount === 'number' ? { base: rowCount } : rowCount;
+const baseCount = normalizedRowCount.base ?? 1;
+const mdCount = normalizedRowCount.md ?? baseCount;
+const lgCount = normalizedRowCount.lg ?? mdCount;
+const maxRows = Math.max(baseCount, mdCount, lgCount);
+
+const rowVisibilityClasses = Array.from({ length: maxRows }, (_, index) => {
+  const rowNumber = index + 1;
+  if (rowNumber <= baseCount) return '';
+  if (rowNumber <= mdCount) return 'hidden md:block';
+  if (rowNumber <= lgCount) return 'hidden lg:block';
+  return 'hidden';
+});
+
+const rowDirections = Array.from({ length: maxRows }, (_, index) =>
+  index % 2 === 0 ? 1 : -1
+);
+
+const rowLogoSets = Array.from({ length: maxRows }, (_, index) => {
+  if (logos.length === 0) return [];
+  const offset = index % logos.length;
+  return logos.slice(offset).concat(logos.slice(0, offset));
+});
+
+const copy = data.logoSlider ?? {
+  label: 'Worked with/For',
+  ariaLabel: 'Logo carousel of teams and brands'
+};
+---
+
+<section
+  class="w-full px-6 pb-12"
+  aria-label={copy.ariaLabel}
+  data-logo-carousel
+  data-autoplay={autoplay ? 'true' : 'false'}
+  data-speed={String(speed)}
+  data-loop={loop ? 'true' : 'false'}
+>
+  <div class="mx-auto w-full max-w-[1200px]">
+    <div class="flex items-center justify-between">
+      <p class="text-xs font-semibold uppercase tracking-[0.32em] text-text-muted">
+        {copy.label}
+      </p>
+    </div>
+
+    <div class="mt-5 grid gap-4 md:gap-5">
+      {rowLogoSets.map((rowLogos, rowIndex) => (
+        <div
+          class={`relative overflow-hidden rounded-2xl border border-border-color bg-surface/70 px-2 backdrop-blur-sm ${rowVisibilityClasses[rowIndex]}`}
+        >
+          <div class="pointer-events-none absolute inset-y-0 left-0 w-16 bg-gradient-to-r from-bg-depth via-bg-depth/80 to-transparent"></div>
+          <div class="pointer-events-none absolute inset-y-0 right-0 w-16 bg-gradient-to-l from-bg-depth via-bg-depth/80 to-transparent"></div>
+          <div
+            class="logo-viewport no-scrollbar relative overflow-x-auto py-4"
+            data-logo-viewport
+            data-direction={String(rowDirections[rowIndex])}
+            aria-roledescription="carousel"
+            aria-label={`${ariaLabel} row ${rowIndex + 1}`}
+            aria-live="off"
+            tabindex="0"
+          >
+            <ul class="logo-track flex w-max items-center gap-6 pr-8 md:gap-8" data-logo-track role="list">
+              {rowLogos.map((logo) => {
+                const lightSrc = logo.lightSrc ?? logo.src ?? '';
+                const darkSrc = logo.darkSrc ?? lightSrc;
+                const hasDark = Boolean(darkSrc && darkSrc !== lightSrc);
+                return (
+                  <li class="shrink-0" data-logo-item>
+                    <div class="flex h-12 w-32 items-center justify-center rounded-xl border border-border-color/60 bg-bg-depth/40 px-3">
+                      <img
+                        src={lightSrc}
+                        alt={logo.alt}
+                        loading="lazy"
+                        decoding="async"
+                        width="240"
+                        height="56"
+                        class={`h-7 w-auto max-w-[120px] opacity-80 transition ${hasDark ? 'dark:hidden' : ''}`}
+                      />
+                      {hasDark && (
+                        <img
+                          src={darkSrc}
+                          alt=""
+                          aria-hidden="true"
+                          loading="lazy"
+                          decoding="async"
+                          width="240"
+                          height="56"
+                          class="hidden h-7 w-auto max-w-[120px] opacity-90 transition dark:block"
+                        />
+                      )}
+                    </div>
+                  </li>
+                );
+              })}
+              {loop &&
+                rowLogos.map((logo) => {
+                  const lightSrc = logo.lightSrc ?? logo.src ?? '';
+                  const darkSrc = logo.darkSrc ?? lightSrc;
+                  const hasDark = Boolean(darkSrc && darkSrc !== lightSrc);
+                  return (
+                    <li class="shrink-0" data-logo-item data-logo-clone aria-hidden="true">
+                      <div class="flex h-12 w-32 items-center justify-center rounded-xl border border-border-color/60 bg-bg-depth/40 px-3">
+                        <img
+                          src={lightSrc}
+                          alt=""
+                          aria-hidden="true"
+                          loading="lazy"
+                          decoding="async"
+                          width="240"
+                          height="56"
+                          class={`h-7 w-auto max-w-[120px] opacity-80 transition ${hasDark ? 'dark:hidden' : ''}`}
+                        />
+                        {hasDark && (
+                          <img
+                            src={darkSrc}
+                            alt=""
+                            aria-hidden="true"
+                            loading="lazy"
+                            decoding="async"
+                            width="240"
+                            height="56"
+                            class="hidden h-7 w-auto max-w-[120px] opacity-90 transition dark:block"
+                          />
+                        )}
+                      </div>
+                    </li>
+                  );
+                })}
+            </ul>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  @media (prefers-reduced-motion: reduce) {
+    [data-logo-clone] {
+      display: none;
+    }
+  }
+</style>
+
+<script type="module">
+  const carousels = document.querySelectorAll('[data-logo-carousel]');
+  const motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+  const initCarousel = (carousel) => {
+    const autoplay = carousel.dataset.autoplay === 'true';
+    const loop = carousel.dataset.loop === 'true';
+    const speed = Number(carousel.dataset.speed || '24000');
+    const viewports = Array.from(carousel.querySelectorAll('[data-logo-viewport]'));
+    const tracks = Array.from(carousel.querySelectorAll('[data-logo-track]'));
+
+    if (!viewports.length || !tracks.length) return;
+
+    const rows = viewports.map((viewport, index) => ({
+      viewport,
+      track: tracks[index],
+      direction: Number(viewport.dataset.direction || '1'),
+      step: 160,
+      cycleWidth: 0
+    }));
+
+    const getGap = (track) => {
+      const styles = window.getComputedStyle(track);
+      const gap = parseFloat(styles.columnGap || styles.gap || '0');
+      return Number.isNaN(gap) ? 0 : gap;
+    };
+
+    const measure = () => {
+      rows.forEach((row) => {
+        const items = row.track.querySelectorAll('[data-logo-item]');
+        const first = items[0];
+        const gap = getGap(row.track);
+        const itemWidth = first ? first.getBoundingClientRect().width : row.viewport.clientWidth * 0.6;
+        row.step = itemWidth + gap;
+        const maxScroll = Math.max(row.track.scrollWidth - row.viewport.clientWidth, 0);
+        row.cycleWidth = loop && maxScroll > 0 ? row.track.scrollWidth / 2 : maxScroll;
+
+        if (row.direction === -1 && row.cycleWidth > 0 && row.viewport.scrollLeft === 0) {
+          row.viewport.scrollLeft = row.cycleWidth;
+        }
+      });
+    };
+
+    const scrollByStep = (direction, targetRow) => {
+      const behavior = motionQuery.matches ? 'auto' : 'smooth';
+      const apply = (row) => {
+        if (row.cycleWidth <= 0) return;
+        const delta = row.step * direction;
+        const next = row.viewport.scrollLeft + delta;
+        if (loop) {
+          const cycleWidth = row.cycleWidth || row.track.scrollWidth / 2;
+          if (direction === 1 && next >= cycleWidth) {
+            row.viewport.scrollLeft = next - cycleWidth;
+            return;
+          }
+          if (direction === -1 && next <= 0) {
+            row.viewport.scrollLeft = next + cycleWidth;
+            return;
+          }
+        }
+        row.viewport.scrollTo({
+          left: Math.max(0, Math.min(next, row.cycleWidth)),
+          behavior
+        });
+      };
+
+      if (targetRow) {
+        apply(targetRow);
+        return;
+      }
+      rows.forEach(apply);
+    };
+
+    let rafId = null;
+    let lastTime = 0;
+
+    const animate = (time) => {
+      if (!autoplay || motionQuery.matches) return;
+      if (!lastTime) lastTime = time;
+      const delta = Math.min(time - lastTime, 64);
+      lastTime = time;
+
+      rows.forEach((row) => {
+        if (row.cycleWidth <= 0) return;
+        const pxPerMs = row.cycleWidth / speed;
+        row.viewport.scrollLeft += pxPerMs * delta * row.direction;
+        if (loop) {
+          if (row.direction === 1 && row.viewport.scrollLeft >= row.cycleWidth) {
+            row.viewport.scrollLeft -= row.cycleWidth;
+          }
+          if (row.direction === -1 && row.viewport.scrollLeft <= 0) {
+            row.viewport.scrollLeft += row.cycleWidth;
+          }
+        } else {
+          row.viewport.scrollLeft = Math.max(0, Math.min(row.viewport.scrollLeft, row.cycleWidth));
+        }
+      });
+
+      rafId = window.requestAnimationFrame(animate);
+    };
+
+    const start = () => {
+      if (!autoplay || motionQuery.matches || rafId) return;
+      lastTime = 0;
+      rafId = window.requestAnimationFrame(animate);
+    };
+
+    const stop = () => {
+      if (rafId) window.cancelAnimationFrame(rafId);
+      rafId = null;
+    };
+
+    rows.forEach((row) => {
+      row.viewport.addEventListener('keydown', (event) => {
+        if (event.key === 'ArrowLeft') {
+          event.preventDefault();
+          scrollByStep(-1, row);
+        }
+        if (event.key === 'ArrowRight') {
+          event.preventDefault();
+          scrollByStep(1, row);
+        }
+      });
+    });
+
+    const handleMotionChange = () => {
+      stop();
+      if (!motionQuery.matches) start();
+    };
+
+    motionQuery.addEventListener('change', handleMotionChange);
+    window.addEventListener('resize', measure);
+    window.addEventListener('load', measure);
+
+    measure();
+    start();
+  };
+
+  carousels.forEach(initCarousel);
+</script>

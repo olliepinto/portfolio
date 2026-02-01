@@ -11,6 +11,10 @@
     { "label": "Experience", "href": "#work" },
     { "label": "Experiments", "href": "#lab" }
   ],
+  "logoSlider": {
+    "label": "Worked with",
+    "ariaLabel": "Logo carousel of teams and brands"
+  },
   "bento": [
     {
       "id": "profile",

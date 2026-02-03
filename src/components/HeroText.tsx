@@ -8,14 +8,15 @@ interface HeroTextProps {
 }
 
 export default function HeroText({ headingId }: HeroTextProps) {
+  const loaderDelay = typeof document !== 'undefined' && document.documentElement.dataset.loader === 'show' ? 2.5 : 0;
   const container = {
     hidden: { opacity: 0 },
     show: {
       opacity: 1,
       transition: {
         staggerChildren: 0.1, 
-        // Delay set to 3.0s to wait for the loading screen to finish
-        delayChildren: 3.0,   
+        // Only delay when the loader actually runs.
+        delayChildren: loaderDelay,
       }
     }
   };

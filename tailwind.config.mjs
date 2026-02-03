@@ -20,9 +20,6 @@ export default {
                 
                 // Body/UI: Poppins (Clean, Geometric)
 				sans: ['Poppins', 'system-ui', 'sans-serif'],
-				body: ['Poppins', 'system-ui', 'sans-serif'],
-				
-				mono: ['Geist Mono', 'monospace'],
 			},
             // Adjusted tracking because Abril Fatface letters are wide
             letterSpacing: {

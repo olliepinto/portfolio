@@ -47,6 +47,16 @@
   }
 }
 
+html[data-loader="skip"] [data-site-loader] {
+  display: none !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto !important;
+  }
+}
+
 /* Improved Green Hover Utility */
 /* This makes the green hover feel 'glowy' rather than dark */
 .hover\:bg-accent-primary\/80:hover {

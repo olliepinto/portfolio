@@ -1,17 +1,43 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { createPortal } from 'react-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, Send, CheckCircle, Loader2 } from 'lucide-react';
+
+const setMainInert = (enabled: boolean) => {
+  if (typeof document === 'undefined') return;
+  const main = document.getElementById('main-content');
+  if (!main) return;
+  const currentCount = Number(main.dataset.modalCount || '0');
+  if (enabled) {
+    const nextCount = currentCount + 1;
+    main.dataset.modalCount = String(nextCount);
+    main.setAttribute('inert', '');
+    main.setAttribute('aria-hidden', 'true');
+    return;
+  }
+  const nextCount = Math.max(0, currentCount - 1);
+  if (nextCount === 0) {
+    main.removeAttribute('inert');
+    main.removeAttribute('aria-hidden');
+    delete main.dataset.modalCount;
+  } else {
+    main.dataset.modalCount = String(nextCount);
+  }
+};
 
 export default function ContactModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) {
   const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const dialogRef = useRef<HTMLDivElement>(null);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
+  const modalRoot = typeof document !== 'undefined' ? document.getElementById('modal-root') : null;
 
   useEffect(() => {
     if (!isOpen) {
       return;
     }
+
+    setMainInert(true);
 
     const dialogNode = dialogRef.current;
     const focusableSelectors = [
@@ -47,7 +73,10 @@ export default function ContactModal({ isOpen, onClose }: { isOpen: boolean; onC
     focusTarget?.focus();
 
     document.addEventListener('keydown', handleKeyDown);
-    return () => document.removeEventListener('keydown', handleKeyDown);
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+      setMainInert(false);
+    };
   }, [isOpen, onClose]);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -101,7 +130,7 @@ export default function ContactModal({ isOpen, onClose }: { isOpen: boolean; onC
     }
   };
 
-  return (
+  const modalMarkup = (
     <AnimatePresence>
       {isOpen && (
         <motion.div
@@ -238,4 +267,6 @@ export default function ContactModal({ isOpen, onClose }: { isOpen: boolean; onC
       )}
     </AnimatePresence>
   );
+
+  return modalRoot ? createPortal(modalMarkup, modalRoot) : modalMarkup;
 }

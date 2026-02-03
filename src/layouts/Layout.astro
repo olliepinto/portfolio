@@ -24,6 +24,7 @@ const {
 
 const canonical =
 	canonicalUrl ?? (Astro.site ? new URL(Astro.url.pathname, Astro.site).href : undefined);
+const ogImageUrl = Astro.site ? new URL(ogImage, Astro.site).href : ogImage;
 
 const personSchema = {
 	"@context": "https://schema.org",
@@ -47,9 +48,9 @@ const personSchema = {
 		{canonical && <meta property="og:url" content={canonical} />}
 		<meta property="og:site_name" content="Ollie Pinto" />
 		<meta property="og:locale" content="en_GB" />
-		<meta property="og:image" content={ogImage} />
+		<meta property="og:image" content={ogImageUrl} />
 		<meta property="og:image:alt" content="Ollie Pinto portfolio preview" />
-		<meta property="twitter:image" content={ogImage} />
+		<meta property="twitter:image" content={ogImageUrl} />
 		<meta property="twitter:card" content="summary_large_image" />
 		<meta name="twitter:title" content={title} />
 		<meta name="twitter:description" content={description} />
@@ -68,11 +69,18 @@ const personSchema = {
         <script is:inline>
             // Only enable dark mode if the user explicitly chose it before.
             // Otherwise, force remove it (Light Mode Default).
-            if (localStorage.theme === 'dark') {
-                document.documentElement.classList.add('dark');
-            } else {
+            try {
+                const storedTheme = localStorage.getItem('theme');
+                if (storedTheme === 'dark') {
+                    document.documentElement.classList.add('dark');
+                } else {
+                    document.documentElement.classList.remove('dark');
+                    if (storedTheme === null) {
+                        localStorage.setItem('theme', 'light'); // Ensure memory is set to light
+                    }
+                }
+            } catch (error) {
                 document.documentElement.classList.remove('dark');
-                localStorage.theme = 'light'; // Ensure memory is set to light
             }
         </script>
 	</head>
@@ -83,5 +91,6 @@ const personSchema = {
 		<main id="main-content" tabindex="-1" class="w-full min-h-screen flex flex-col items-center overflow-x-hidden">
 			<slot />
 		</main>
+		<div id="modal-root"></div>
 	</body>
 </html>

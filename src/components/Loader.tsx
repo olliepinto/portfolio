@@ -2,6 +2,24 @@ import React, { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const words = ["Creative", "Strategy", "Operations", "Systems", "Ollie Pinto"];
+const LOADER_DURATION_MS = 2500;
+const WORD_INTERVAL_MS = 400;
+const COUNT_INTERVAL_MS = 30;
+const LOADER_SESSION_KEY = 'portfolio:loader-seen';
+
+const shouldShowLoader = () => {
+  if (typeof document === 'undefined') return true;
+  const datasetSetting = document.documentElement.dataset.loader;
+  if (datasetSetting) return datasetSetting !== 'skip';
+  try {
+    const reduceMotion = window.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches ?? false;
+    const saveData = navigator.connection?.saveData ?? false;
+    const hasSeen = sessionStorage.getItem(LOADER_SESSION_KEY) === 'true';
+    return !(reduceMotion || saveData || hasSeen);
+  } catch (error) {
+    return true;
+  }
+};
 
 export default function Loader() {
   const [isLoading, setIsLoading] = useState(true);
@@ -9,7 +27,20 @@ export default function Loader() {
   const [wordIndex, setWordIndex] = useState(0);
 
   useEffect(() => {
+    if (!shouldShowLoader()) {
+      setIsLoading(false);
+      return;
+    }
+
+    const main = document.getElementById('main-content');
+    const previousOverflow = document.body.style.overflow;
     document.body.style.overflow = 'hidden';
+    main?.setAttribute('aria-busy', 'true');
+    try {
+      sessionStorage.setItem(LOADER_SESSION_KEY, 'true');
+    } catch (error) {
+      // Session storage may be unavailable.
+    }
 
     const counterInterval = setInterval(() => {
       setCount((prev) => {
@@ -20,26 +51,28 @@ export default function Loader() {
         }
         return next;
       });
-    }, 30);
+    }, COUNT_INTERVAL_MS);
 
     const wordInterval = setInterval(() => {
       setWordIndex((prev) => {
         if (prev === words.length - 1) return prev;
         return prev + 1;
       });
-    }, 400);
+    }, WORD_INTERVAL_MS);
 
     const timeout = setTimeout(() => {
       setIsLoading(false);
-      document.body.style.overflow = 'auto';
+      document.body.style.overflow = previousOverflow;
+      main?.removeAttribute('aria-busy');
       clearInterval(wordInterval);
-    }, 2500);
+    }, LOADER_DURATION_MS);
 
     return () => {
       clearInterval(counterInterval);
       clearInterval(wordInterval);
       clearTimeout(timeout);
-      document.body.style.overflow = 'auto';
+      document.body.style.overflow = previousOverflow;
+      main?.removeAttribute('aria-busy');
     };
   }, []);
 
@@ -57,6 +90,7 @@ export default function Loader() {
           role="status"
           aria-live="polite"
           aria-label="Site loading"
+          data-site-loader="true"
           className="fixed left-0 top-0 z-[999] flex w-screen h-[100lvh] min-h-[100vh] flex-col items-center justify-center bg-bg-depth text-text-primary px-4"
           style={{
             paddingBottom: 'env(safe-area-inset-bottom)',

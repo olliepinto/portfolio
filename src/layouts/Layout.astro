@@ -1,15 +1,9 @@
 ---
 import '../styles/global.css';
 
-// 1. Body Font (Functional)
-import '@fontsource/inter'; 
-// 2. Headline Font (Loud/Bold)
-import '@fontsource/inter-tight'; 
-// 3. Editorial Font (Elegant/Serif)
-import '@fontsource/newsreader'; 
-// 4. UI Font (Friendly/Geometric)
+// Body/UI font
 import '@fontsource/poppins';
-// 5. Display Font (High Contrast)
+// Display/headline font
 import '@fontsource/abril-fatface';
 
 const DEFAULT_DESCRIPTION = "Senior B2B marketer with a creative-technical foundation, building AI-powered marketing systems, workflow automation, and content strategies that drive pipeline efficiency and measurable growth.";
@@ -81,6 +75,21 @@ const personSchema = {
                 }
             } catch (error) {
                 document.documentElement.classList.remove('dark');
+            }
+
+            // Loader logic: show once per session, skip for reduced motion/data-saver users.
+            try {
+                const loaderKey = 'portfolio:loader-seen';
+                const reduceMotion = window.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches ?? false;
+                const saveData = navigator.connection?.saveData ?? false;
+                const hasSeen = sessionStorage.getItem(loaderKey) === 'true';
+                const shouldShow = !(reduceMotion || saveData || hasSeen);
+                document.documentElement.dataset.loader = shouldShow ? 'show' : 'skip';
+                if (shouldShow) {
+                    sessionStorage.setItem(loaderKey, 'true');
+                }
+            } catch (error) {
+                document.documentElement.dataset.loader = 'show';
             }
         </script>
 	</head>

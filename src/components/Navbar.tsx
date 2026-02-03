@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X } from 'lucide-react';
+import { Linkedin, Menu, X } from 'lucide-react';
 import data from '../data/portfolio.json';
 import ThemeToggle from './ThemeToggle';
 import ContactModal from './ContactModal';
@@ -8,6 +8,7 @@ import ContactModal from './ContactModal';
 export default function Navbar() {
   const [isContactOpen, setIsContactOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const linkedin = data.social?.linkedin;
 
   return (
     <>
@@ -45,6 +46,18 @@ export default function Navbar() {
             >
               Let's Talk
             </button>
+            {linkedin ? (
+              <a
+                href={linkedin.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={linkedin.label}
+                title={linkedin.label}
+                className="ml-1 inline-flex items-center justify-center w-10 h-10 rounded-full border border-border-color bg-surface hover:bg-surface-hover hover:border-accent-secondary/60 transition-colors"
+              >
+                <Linkedin size={18} className="text-black dark:text-white" />
+              </a>
+            ) : null}
           </div>
 
           {/* 2. MOBILE LAYOUT (Visible on Mobile) */}
@@ -76,6 +89,18 @@ export default function Navbar() {
             >
               Let's Talk
             </button>
+            {linkedin ? (
+              <a
+                href={linkedin.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={linkedin.label}
+                title={linkedin.label}
+                className="inline-flex items-center justify-center w-10 h-10 rounded-full border border-border-color bg-surface hover:bg-surface-hover hover:border-accent-secondary/60 transition-colors"
+              >
+                <Linkedin size={18} className="text-black dark:text-white" />
+              </a>
+            ) : null}
           </div>
 
           {/* 3. MOBILE MENU DROPDOWN */}

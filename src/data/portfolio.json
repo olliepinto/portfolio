@@ -11,6 +11,12 @@
     { "label": "Experience", "href": "#work" },
     { "label": "Experiments", "href": "#lab" }
   ],
+  "social": {
+    "linkedin": {
+      "label": "LinkedIn",
+      "url": "https://www.linkedin.com/in/oliver-pinto/"
+    }
+  },
   "logoSlider": {
     "label": "Worked with",
     "ariaLabel": "Logo carousel of teams and brands"

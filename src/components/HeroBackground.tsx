@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
+import { motion, useMotionValue, useReducedMotion, useSpring, useTransform } from 'framer-motion';
 
 export default function HeroBackground() {
   const [windowSize, setWindowSize] = useState({ width: 0, height: 0 });
+  const prefersReducedMotion = useReducedMotion();
 
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
@@ -20,31 +21,40 @@ export default function HeroBackground() {
   const y2 = useTransform(y, [0, windowSize.height || 1], [20, -20]);
 
   useEffect(() => {
-    setWindowSize({
-        width: window.innerWidth,
-        height: window.innerHeight
-    });
+    const isCoarsePointer = window.matchMedia('(pointer: coarse)').matches;
+    const reduceMotion = prefersReducedMotion || isCoarsePointer;
+
+    const handleResize = () => {
+      const width = window.innerWidth;
+      const height = window.innerHeight;
+      setWindowSize({ width, height });
+      if (reduceMotion) {
+        mouseX.set(width / 2);
+        mouseY.set(height / 2);
+      }
+    };
 
     const handleMouseMove = (e: MouseEvent) => {
       mouseX.set(e.clientX);
       mouseY.set(e.clientY);
     };
 
-    const handleResize = () => {
-        setWindowSize({
-            width: window.innerWidth,
-            height: window.innerHeight
-        });
-    };
+    handleResize();
+    window.addEventListener("resize", handleResize);
+
+    if (reduceMotion) {
+      return () => {
+        window.removeEventListener("resize", handleResize);
+      };
+    }
 
     window.addEventListener("mousemove", handleMouseMove);
-    window.addEventListener("resize", handleResize);
     
     return () => {
-        window.removeEventListener("mousemove", handleMouseMove);
-        window.removeEventListener("resize", handleResize);
+      window.removeEventListener("mousemove", handleMouseMove);
+      window.removeEventListener("resize", handleResize);
     };
-  }, []);
+  }, [prefersReducedMotion, mouseX, mouseY]);
 
   return (
     <div aria-hidden="true" className="absolute inset-0 z-0 overflow-hidden pointer-events-none opacity-40 dark:opacity-20">

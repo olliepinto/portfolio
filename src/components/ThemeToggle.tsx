@@ -5,6 +5,13 @@ import { motion } from 'framer-motion';
 export default function ThemeToggle() {
   // Default state is 'light'
   const [theme, setTheme] = useState<'light' | 'dark'>('light');
+  const setStoredTheme = (value: 'light' | 'dark') => {
+    try {
+      localStorage.setItem('theme', value);
+    } catch (error) {
+      // Storage may be unavailable (private mode / locked down).
+    }
+  };
 
   useEffect(() => {
     // On load, sync state with what's actually on the HTML tag
@@ -19,11 +26,11 @@ export default function ThemeToggle() {
     if (theme === 'light') {
       setTheme('dark');
       document.documentElement.classList.add('dark');
-      localStorage.theme = 'dark';
+      setStoredTheme('dark');
     } else {
       setTheme('light');
       document.documentElement.classList.remove('dark');
-      localStorage.theme = 'light';
+      setStoredTheme('light');
     }
   };
 

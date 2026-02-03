@@ -1,17 +1,45 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { createPortal } from 'react-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowUpRight, X, Calendar, ChevronRight } from 'lucide-react';
 import data from '../data/portfolio.json';
 
+type Project = (typeof data.work.projects)[number];
+
+const setMainInert = (enabled: boolean) => {
+  if (typeof document === 'undefined') return;
+  const main = document.getElementById('main-content');
+  if (!main) return;
+  const currentCount = Number(main.dataset.modalCount || '0');
+  if (enabled) {
+    const nextCount = currentCount + 1;
+    main.dataset.modalCount = String(nextCount);
+    main.setAttribute('inert', '');
+    main.setAttribute('aria-hidden', 'true');
+    return;
+  }
+  const nextCount = Math.max(0, currentCount - 1);
+  if (nextCount === 0) {
+    main.removeAttribute('inert');
+    main.removeAttribute('aria-hidden');
+    delete main.dataset.modalCount;
+  } else {
+    main.dataset.modalCount = String(nextCount);
+  }
+};
+
 export default function WorkGrid() {
-  const [selectedProject, setSelectedProject] = useState<any>(null);
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const dialogRef = useRef<HTMLDivElement>(null);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
+  const modalRoot = typeof document !== 'undefined' ? document.getElementById('modal-root') : null;
 
   useEffect(() => {
     if (!selectedProject) {
       return;
     }
+
+    setMainInert(true);
 
     const dialogNode = dialogRef.current;
     const focusableSelectors = [
@@ -47,8 +75,79 @@ export default function WorkGrid() {
     focusTarget?.focus();
 
     document.addEventListener('keydown', handleKeyDown);
-    return () => document.removeEventListener('keydown', handleKeyDown);
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+      setMainInert(false);
+    };
   }, [selectedProject]);
+
+  const modalMarkup = (
+    <AnimatePresence>
+      {selectedProject && (
+        <motion.div 
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          onClick={() => setSelectedProject(null)}
+          className="fixed inset-0 z-[100] flex items-center justify-center px-4 bg-bg-depth/80 backdrop-blur-sm"
+        >
+          <motion.div 
+            ref={dialogRef}
+            initial={{ scale: 0.9, opacity: 0, y: 20 }}
+            animate={{ scale: 1, opacity: 1, y: 0 }}
+            exit={{ scale: 0.9, opacity: 0, y: 20 }}
+            onClick={(e) => e.stopPropagation()}
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="project-detail-title"
+            aria-describedby="project-detail-description"
+            id="project-detail-dialog"
+            className="bg-surface border border-border-color rounded-3xl p-8 md:p-12 max-w-2xl w-full shadow-2xl relative overflow-y-auto max-h-[90vh]"
+          >
+            <button 
+              ref={closeButtonRef}
+              onClick={() => setSelectedProject(null)}
+              type="button"
+              aria-label="Close project details"
+              className="absolute top-6 right-6 p-2 bg-surface-hover rounded-full hover:bg-border-color transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-text-primary"
+            >
+              <X size={20} />
+            </button>
+
+            <div className="mb-2 flex items-center gap-2 text-text-muted font-sans text-sm">
+              <Calendar size={14} />
+              <span>{selectedProject.period}</span>
+            </div>
+            
+            <h2 id="project-detail-title" className="text-3xl md:text-4xl font-sans font-bold mb-2 text-text-primary">{selectedProject.client}</h2>
+            
+            <h3 id="project-detail-description" className="text-xl text-accent-secondary font-medium mb-8 font-sans">{selectedProject.role}</h3>
+
+            <div className="space-y-6">
+              <div className="flex flex-wrap gap-2 mb-6">
+                  {selectedProject.tags.map((tag: string) => (
+                    <span key={tag} className="text-sm font-medium px-4 py-1.5 rounded-full bg-surface-hover text-text-primary border border-border-color lowercase font-sans">{tag}</span>
+                  ))}
+              </div>
+
+              <div className="space-y-4">
+                <h4 className="text-sm font-bold uppercase tracking-widest text-text-muted font-sans">Key Contributions</h4>
+                <ul className="space-y-3">
+                  {selectedProject.full_desc.map((point: string, i: number) => (
+                    <li key={i} className="flex items-start gap-3 text-text-primary leading-relaxed font-sans">
+                      <ChevronRight size={18} className="text-accent-secondary mt-1 shrink-0" />
+                      <span>{point}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+
+          </motion.div>
+        </motion.div>
+      )}
+    </AnimatePresence>
+  );
 
   return (
     <section id="work" className="w-full py-24 border-t border-border-color bg-surface/30">
@@ -95,71 +194,7 @@ export default function WorkGrid() {
         ))}
       </div>
 
-      <AnimatePresence>
-        {selectedProject && (
-          <motion.div 
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            onClick={() => setSelectedProject(null)}
-            className="fixed inset-0 z-[100] flex items-center justify-center px-4 bg-bg-depth/80 backdrop-blur-sm"
-          >
-            <motion.div 
-              ref={dialogRef}
-              initial={{ scale: 0.9, opacity: 0, y: 20 }}
-              animate={{ scale: 1, opacity: 1, y: 0 }}
-              exit={{ scale: 0.9, opacity: 0, y: 20 }}
-              onClick={(e) => e.stopPropagation()}
-              role="dialog"
-              aria-modal="true"
-              aria-labelledby="project-detail-title"
-              aria-describedby="project-detail-description"
-              id="project-detail-dialog"
-              className="bg-surface border border-border-color rounded-3xl p-8 md:p-12 max-w-2xl w-full shadow-2xl relative overflow-y-auto max-h-[90vh]"
-            >
-              <button 
-                ref={closeButtonRef}
-                onClick={() => setSelectedProject(null)}
-                type="button"
-                aria-label="Close project details"
-                className="absolute top-6 right-6 p-2 bg-surface-hover rounded-full hover:bg-border-color transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-text-primary"
-              >
-                <X size={20} />
-              </button>
-
-              <div className="mb-2 flex items-center gap-2 text-text-muted font-sans text-sm">
-                <Calendar size={14} />
-                <span>{selectedProject.period}</span>
-              </div>
-              
-              <h2 id="project-detail-title" className="text-3xl md:text-4xl font-sans font-bold mb-2 text-text-primary">{selectedProject.client}</h2>
-              
-              <h3 id="project-detail-description" className="text-xl text-accent-secondary font-medium mb-8 font-sans">{selectedProject.role}</h3>
-
-              <div className="space-y-6">
-                <div className="flex flex-wrap gap-2 mb-6">
-                    {selectedProject.tags.map((tag: string) => (
-                      <span key={tag} className="text-sm font-medium px-4 py-1.5 rounded-full bg-surface-hover text-text-primary border border-border-color lowercase font-sans">{tag}</span>
-                    ))}
-                </div>
-
-                <div className="space-y-4">
-                  <h4 className="text-sm font-bold uppercase tracking-widest text-text-muted font-sans">Key Contributions</h4>
-                  <ul className="space-y-3">
-                    {selectedProject.full_desc.map((point: string, i: number) => (
-                      <li key={i} className="flex items-start gap-3 text-text-primary leading-relaxed font-sans">
-                        <ChevronRight size={18} className="text-accent-secondary mt-1 shrink-0" />
-                        <span>{point}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
-
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      {modalRoot ? createPortal(modalMarkup, modalRoot) : modalMarkup}
     </section>
   );
 }

@@ -1,51 +1,47 @@
-# Astro Starter Kit: Minimal
+# Ollie Pinto Portfolio
 
-```sh
-npm create astro@latest -- --template minimal
-```
+This is my personal portfolio site, designed to showcase selected work, experiments, and how I approach modern marketing and creative strategy.
 
-<!-- ASTRO:REMOVE:START -->
+Live site: [https://www.olliepinto.com](https://www.olliepinto.com)
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/minimal)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/minimal)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/minimal/devcontainer.json)
+## About The Project
 
-<!-- ASTRO:REMOVE:END -->
+The site is a single-page experience focused on clarity, movement, and storytelling. It combines a clean content structure with expressive visual design to present:
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+- A short personal introduction
+- Brand and platform experience
+- Case-study style work highlights
+- An experimental "lab" section
+- A direct contact flow
 
-## 🚀 Project Structure
+## How It’s Built
 
-Inside of your Astro project, you'll see the following folders and files:
+This project is built as a static-first Astro site with React islands for interactive sections. That approach keeps core content fast and SEO-friendly while allowing richer UI behavior where it matters.
 
-```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
-```
+Most written content is structured in a central JSON data model, which makes updates consistent across sections and keeps layout logic separate from copy.
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+## Architecture Highlights
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+- Astro for page composition, layout, and metadata management
+- React islands for interactive components like navigation, modals, and animated content rails
+- Tailwind CSS + design tokens for a consistent, themeable visual system
+- Framer Motion for purposeful transitions and UI movement
+- Structured SEO setup including canonical tags, social preview metadata, and schema markup
 
-Any static assets, like images, can be placed in the `public/` directory.
+## Design Direction
 
-## 🧞 Commands
+The design balances editorial style with interactive UI:
 
-All commands are run from the root of the project, from a terminal:
+- Bold typography and layered backgrounds
+- Motion-led section transitions
+- Responsive layouts for desktop and mobile
+- Light/dark theming with accessibility in mind
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+## Purpose
 
-## 👀 Want to learn more?
+This portfolio is intended to communicate both strategic thinking and execution quality: not just what I have worked on, but how I think and build.
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+## Contact
+
+If you’d like to collaborate or connect, use the contact section on the site:
+[https://www.olliepinto.com](https://www.olliepinto.com)

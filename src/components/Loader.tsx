@@ -1,20 +1,23 @@
-import React, { useEffect, useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { useEffect, useState } from "react";
+import { motion, AnimatePresence, type Variants } from "framer-motion";
 
 const words = ["Creative", "Strategy", "Operations", "Systems", "Ollie Pinto"];
 const LOADER_DURATION_MS = 2500;
 const WORD_INTERVAL_MS = 400;
 const COUNT_INTERVAL_MS = 30;
-const LOADER_SESSION_KEY = 'portfolio:loader-seen';
+const LOADER_SESSION_KEY = "portfolio:loader-seen";
 
 const shouldShowLoader = () => {
-  if (typeof document === 'undefined') return true;
+  if (typeof document === "undefined") return true;
+
   const datasetSetting = document.documentElement.dataset.loader;
-  if (datasetSetting) return datasetSetting !== 'skip';
+  if (datasetSetting) return datasetSetting !== "skip";
+
   try {
-    const reduceMotion = window.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches ?? false;
+    const reduceMotion =
+      window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches ?? false;
     const saveData = navigator.connection?.saveData ?? false;
-    const hasSeen = sessionStorage.getItem(LOADER_SESSION_KEY) === 'true';
+    const hasSeen = sessionStorage.getItem(LOADER_SESSION_KEY) === "true";
     return !(reduceMotion || saveData || hasSeen);
   } catch (error) {
     return true;
@@ -32,12 +35,13 @@ export default function Loader() {
       return;
     }
 
-    const main = document.getElementById('main-content');
+    const main = document.getElementById("main-content");
     const previousOverflow = document.body.style.overflow;
-    document.body.style.overflow = 'hidden';
-    main?.setAttribute('aria-busy', 'true');
+    document.body.style.overflow = "hidden";
+    main?.setAttribute("aria-busy", "true");
+
     try {
-      sessionStorage.setItem(LOADER_SESSION_KEY, 'true');
+      sessionStorage.setItem(LOADER_SESSION_KEY, "true");
     } catch (error) {
       // Session storage may be unavailable.
     }
@@ -60,25 +64,32 @@ export default function Loader() {
       });
     }, WORD_INTERVAL_MS);
 
+    const restorePageState = () => {
+      document.body.style.overflow = previousOverflow;
+      main?.removeAttribute("aria-busy");
+    };
+
     const timeout = setTimeout(() => {
       setIsLoading(false);
-      document.body.style.overflow = previousOverflow;
-      main?.removeAttribute('aria-busy');
+      clearInterval(counterInterval);
       clearInterval(wordInterval);
+      restorePageState();
     }, LOADER_DURATION_MS);
 
     return () => {
       clearInterval(counterInterval);
       clearInterval(wordInterval);
       clearTimeout(timeout);
-      document.body.style.overflow = previousOverflow;
-      main?.removeAttribute('aria-busy');
+      restorePageState();
     };
   }, []);
 
   const loaderVariants = {
-    exit: { y: '-100%', transition: { duration: 0.8, ease: [0.76, 0, 0.24, 1] } },
-  };
+    exit: {
+      y: "-100%",
+      transition: { duration: 0.8, ease: [0.76, 0, 0.24, 1] as const },
+    },
+  } satisfies Variants;
 
   return (
     <AnimatePresence>
@@ -93,12 +104,11 @@ export default function Loader() {
           data-site-loader="true"
           className="fixed left-0 top-0 z-[999] flex w-screen h-[100lvh] min-h-[100vh] flex-col items-center justify-center bg-bg-depth text-text-primary px-4"
           style={{
-            paddingBottom: 'env(safe-area-inset-bottom)',
-            paddingTop: 'env(safe-area-inset-top)',
+            paddingBottom: "env(safe-area-inset-bottom)",
+            paddingTop: "env(safe-area-inset-top)",
           }}
         >
           <div className="w-full max-w-md">
-            
             {/* Top Bar */}
             <div className="flex justify-between items-end mb-4 font-sans text-xs text-text-muted uppercase tracking-widest">
               <span>Loading...</span>
@@ -107,7 +117,7 @@ export default function Loader() {
 
             {/* Progress Bar */}
             <div className="w-full h-[2px] bg-surface relative overflow-hidden rounded-full mb-12">
-              <motion.div 
+              <motion.div
                 className="absolute top-0 left-0 h-full bg-accent-primary"
                 initial={{ width: "0%" }}
                 animate={{ width: `${count}%` }}
@@ -116,19 +126,18 @@ export default function Loader() {
 
             {/* Changing Words - UPDATED TO ABRIL FATFACE */}
             <div className="h-20 overflow-hidden flex items-center justify-center">
-                <motion.h1 
-                    key={wordIndex}
-                    initial={{ y: 20, opacity: 0, filter: "blur(5px)" }}
-                    animate={{ y: 0, opacity: 1, filter: "blur(0px)" }}
-                    exit={{ y: -20, opacity: 0 }}
-                    transition={{ duration: 0.3 }}
-                    // Added font-serif, tracking-wide, and slightly larger size
-                    className="text-4xl md:text-6xl font-serif font-normal tracking-wide text-center"
-                >
-                    {words[wordIndex]}
-                </motion.h1>
+              <motion.h1
+                key={wordIndex}
+                initial={{ y: 20, opacity: 0, filter: "blur(5px)" }}
+                animate={{ y: 0, opacity: 1, filter: "blur(0px)" }}
+                exit={{ y: -20, opacity: 0 }}
+                transition={{ duration: 0.3 }}
+                // Added font-serif, tracking-wide, and slightly larger size
+                className="text-4xl md:text-6xl font-serif font-normal tracking-wide text-center"
+              >
+                {words[wordIndex]}
+              </motion.h1>
             </div>
-
           </div>
         </motion.div>
       )}

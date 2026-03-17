@@ -119,7 +119,7 @@ const copy = data.logoSlider ?? {
             tabindex="0"
           >
             <ul class="logo-track flex w-max items-center gap-6 pr-8 md:gap-8" data-logo-track role="list">
-              {rowLogos.map((logo) => {
+              {rowLogos.map((logo: LogoItem) => {
                 const lightSrc = logo.lightSrc ?? logo.src ?? '';
                 const darkSrc = logo.darkSrc ?? lightSrc;
                 const hasDark = Boolean(darkSrc && darkSrc !== lightSrc);
@@ -152,7 +152,7 @@ const copy = data.logoSlider ?? {
                 );
               })}
               {loop &&
-                rowLogos.map((logo) => {
+                rowLogos.map((logo: LogoItem) => {
                   const lightSrc = logo.lightSrc ?? logo.src ?? '';
                   const darkSrc = logo.darkSrc ?? lightSrc;
                   const hasDark = Boolean(darkSrc && darkSrc !== lightSrc);
@@ -201,7 +201,7 @@ const copy = data.logoSlider ?? {
   }
 </style>
 
-<script type="module">
+<script is:inline type="module">
   const carousels = document.querySelectorAll('[data-logo-carousel]');
   const motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
 

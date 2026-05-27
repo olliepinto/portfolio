@@ -7,3 +7,6 @@ interface NetworkInformation {
 interface Navigator {
   connection?: NetworkInformation;
 }
+
+declare module "@fontsource/abril-fatface";
+declare module "@fontsource/poppins";

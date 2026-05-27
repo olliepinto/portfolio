@@ -44,22 +44,53 @@
           {
             "name": "strategic marketing",
             "color": "orange",
-            "items": ["demand generation & pipeline marketing", "marketing automation & ai", "b2b campaign strategy", "brand positioning & messaging", "crm & lifecycle marketing", "seo & digital marketing"]
+            "items": [
+              "demand generation & pipeline marketing",
+              "marketing automation & ai",
+              "b2b campaign strategy",
+              "brand positioning & messaging",
+              "crm & lifecycle marketing",
+              "seo & digital marketing"
+            ]
           },
           {
             "name": "technical & automation",
             "color": "emerald",
-            "items": ["ai-powered marketing tools", "workflow automation", "crm management", "marketing analytics", "web development"]
+            "items": [
+              "ai-powered marketing tools",
+              "workflow automation",
+              "crm management",
+              "marketing analytics",
+              "web development"
+            ]
           },
           {
             "name": "creative & content",
             "color": "blue",
-            "items": ["content strategy & copywriting", "video production & motion design", "ui/ux design", "creative direction"]
+            "items": [
+              "content strategy & copywriting",
+              "video production & motion design",
+              "ui/ux design",
+              "creative direction"
+            ]
           },
           {
             "name": "tools",
             "color": "slate",
-            "items": ["figma", "adobe cc", "hubspot", "activecampaign", "google analytics", "make.com", "n8n", "python", "wordpress", "framer", "cursor", "notion"]
+            "items": [
+              "figma",
+              "adobe cc",
+              "hubspot",
+              "activecampaign",
+              "google analytics",
+              "make.com",
+              "n8n",
+              "python",
+              "wordpress",
+              "framer",
+              "cursor",
+              "notion"
+            ]
           }
         ]
       }
@@ -110,12 +141,12 @@
         "tags": ["b2b", "automation", "ops"],
         "short_desc": "Scaled LinkedIn performance, built AI lead qualification, and reduced CRM costs.",
         "full_desc": [
-            "Grew LinkedIn performance vs prior-year baseline: impressions +126%, engagements +268% (organic). Shaped tone of voice, ran performance standups, and turned insights into optimisations.",
-            "Designed and implemented an AI-powered lead qualification system (Make.com + OpenAI) that filters inbound leads, scores against ICP criteria, enriches company data, and routes qualified MQLs to sales. Reduced unqualified pipeline by 49%.",
-            "Built custom AI content tools that cut the brief-to-draft cycle by ~70% while keeping brand consistency and ICP alignment.",
-            "Led CRM evaluation and migration from a high-cost platform to an optimised solution. Delivered a 66% cost reduction (about GBP 5,800 annual savings) and improved deliverability and campaign tracking.",
-            "Collaborated with sales and product to align messaging with customer pain points, improving lead-to-opportunity conversion.",
-            "Managed WordPress CMS and implemented technical optimisations that improved site performance and user experience."
+          "Grew LinkedIn performance vs prior-year baseline: impressions +126%, engagements +268% (organic). Shaped tone of voice, ran performance standups, and turned insights into optimisations.",
+          "Designed and implemented an AI-powered lead qualification system (Make.com + OpenAI) that filters inbound leads, scores against ICP criteria, enriches company data, and routes qualified MQLs to sales. Reduced unqualified pipeline by 49%.",
+          "Built custom AI content tools that cut the brief-to-draft cycle by ~70% while keeping brand consistency and ICP alignment.",
+          "Led CRM evaluation and migration from a high-cost platform to an optimised solution. Delivered a 66% cost reduction (about GBP 5,800 annual savings) and improved deliverability and campaign tracking.",
+          "Collaborated with sales and product to align messaging with customer pain points, improving lead-to-opportunity conversion.",
+          "Managed WordPress CMS and implemented technical optimisations that improved site performance and user experience."
         ]
       },
       {
@@ -126,11 +157,11 @@
         "tags": ["campaigns", "partnerships", "content"],
         "short_desc": "Drove partnership campaigns and social growth for Sky Broadband Gaming Plan.",
         "full_desc": [
-            "Supported marketing strategy that helped secure $1.1m revenue for the Sky Broadband Gaming Plan through campaign planning and cross-functional execution.",
-            "Led social media activity for the Sky partnership, contributing to 80.6m impressions across key gaming audiences.",
-            "Led website redesign initiative, owning copywriting and SEO strategy in collaboration with an external developer.",
-            "Developed B2B marketing strategy, including investor newsletters and LinkedIn content cadence.",
-            "Built a custom AI tone-of-voice tool to maintain brand messaging consistency at scale."
+          "Supported marketing strategy that helped secure $1.1m revenue for the Sky Broadband Gaming Plan through campaign planning and cross-functional execution.",
+          "Led social media activity for the Sky partnership, contributing to 80.6m impressions across key gaming audiences.",
+          "Led website redesign initiative, owning copywriting and SEO strategy in collaboration with an external developer.",
+          "Developed B2B marketing strategy, including investor newsletters and LinkedIn content cadence.",
+          "Built a custom AI tone-of-voice tool to maintain brand messaging consistency at scale."
         ]
       },
       {
@@ -141,10 +172,10 @@
         "tags": ["b2b", "rebrand", "financial services"],
         "short_desc": "Supported a B2B rebrand and investor marketing for Private Credit.",
         "full_desc": [
-            "Contributed to the B2B rebrand of the Private Credit division, supporting brand positioning and campaign execution.",
-            "Executed campaigns that increased engagement with individual and institutional investors through targeted messaging and multi-channel distribution.",
-            "Managed external suppliers for video, webinar, and presentation production to ensure brand consistency and on-time delivery.",
-            "Supported digital marketing initiatives including website UX/SEO improvements and LinkedIn campaign management."
+          "Contributed to the B2B rebrand of the Private Credit division, supporting brand positioning and campaign execution.",
+          "Executed campaigns that increased engagement with individual and institutional investors through targeted messaging and multi-channel distribution.",
+          "Managed external suppliers for video, webinar, and presentation production to ensure brand consistency and on-time delivery.",
+          "Supported digital marketing initiatives including website UX/SEO improvements and LinkedIn campaign management."
         ]
       },
       {
@@ -155,12 +186,12 @@
         "tags": ["creative", "video", "ui/ux"],
         "short_desc": "Built a creative-technical foundation across video, motion, UI/UX, and brand.",
         "full_desc": [
-            "Sky: 11-month creative internship at Sky Creative, specialising in Brand Experience.",
-            "Vebu: creative role at Somerset House agency.",
-            "Baxter: motion designer for fashion tech startup.",
-            "J4CKIECHAN: YouTube channel manager; grew to 10k+ subscribers with videos reaching 100k+ views (Blizzard Entertainment partnership).",
-            "Decca Records: UMG promotions intern.",
-            "CSL Integration: projects assistant."
+          "Sky: 11-month creative internship at Sky Creative, specialising in Brand Experience.",
+          "Vebu: creative role at Somerset House agency.",
+          "Baxter: motion designer for fashion tech startup.",
+          "J4CKIECHAN: YouTube channel manager; grew to 10k+ subscribers with videos reaching 100k+ views (Blizzard Entertainment partnership).",
+          "Decca Records: UMG promotions intern.",
+          "CSL Integration: projects assistant."
         ]
       }
     ]
@@ -187,5 +218,5 @@
       }
     ]
   },
-  "footer": "© 2025 Ollie Pinto"
+  "footer": "© 2026 Ollie Pinto"
 }

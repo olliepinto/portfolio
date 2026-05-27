@@ -1,48 +1,73 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --color-bg-depth: var(--bg-depth);
+  --color-surface: var(--surface);
+  --color-surface-hover: var(--surface-hover);
+  --color-accent-primary: var(--accent-primary);
+  --color-accent-secondary: var(--accent-secondary);
+  --color-text-primary: var(--text-primary);
+  --color-text-muted: var(--text-muted);
+  --color-border-color: var(--border-color);
+
+  --font-serif: "Abril Fatface", cursive;
+  --font-sans: "Poppins", system-ui, sans-serif;
+
+  --tracking-tighter: -0.02em;
+  --tracking-tight: -0.01em;
+  --tracking-normal: 0;
+  --tracking-wide: 0.02em;
+  --tracking-widest: 0.1em;
+}
 
 @layer base {
   :root {
     /* REVERTED: Clean Light Mode */
-    --bg-depth: oklch(0.99 0.005 240); 
+    --bg-depth: oklch(0.99 0.005 240);
     --surface: oklch(1 0 0);
     --surface-hover: oklch(0.97 0.01 240);
-    
+
     --text-primary: oklch(0.15 0.02 240);
     --text-muted: oklch(0.45 0 0);
-    
+
     /* 1. Primary: MINT GREEN (Kept, but cleaner) */
-    --accent-primary: oklch(0.7 0.15 150); 
-    
+    --accent-primary: oklch(0.7 0.15 150);
+
     /* 2. Secondary: TERRACOTTA (Replaces Purple) */
     /* Using the specific hex from your palette */
-    --accent-secondary: #E39A7B; 
-    
+    --accent-secondary: #e39a7b;
+
     --border-color: oklch(0 0 0 / 0.1);
   }
 
   .dark {
     /* REVERTED: Clean Dark Mode */
     --bg-depth: oklch(0.15 0.02 240);
-    --surface: oklch(0.20 0.03 240);
+    --surface: oklch(0.2 0.03 240);
     --surface-hover: oklch(0.25 0.04 240);
-    
+
     --text-primary: oklch(0.98 0 0);
-    --text-muted: oklch(0.70 0 0);
-    
+    --text-muted: oklch(0.7 0 0);
+
     --accent-primary: oklch(0.7 0.15 150);
-    --accent-secondary: #E39A7B; /* Terracotta in Dark Mode too */
-    
+    --accent-secondary: #e39a7b; /* Terracotta in Dark Mode too */
+
     --border-color: oklch(1 1 1 / 0.1);
   }
 
   body {
     @apply bg-bg-depth text-text-primary font-sans antialiased transition-colors duration-300;
   }
-  
+
   /* Headings use Abril Fatface */
-  h1, h2, h3, h4, h5, h6 {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     @apply font-serif tracking-normal font-normal;
   }
 }
@@ -60,24 +85,24 @@ html[data-loader="skip"] [data-site-loader] {
 /* Improved Green Hover Utility */
 /* This makes the green hover feel 'glowy' rather than dark */
 .hover\:bg-accent-primary\/80:hover {
-    background-color: color-mix(in srgb, var(--accent-primary), white 20%);
+  background-color: color-mix(in srgb, var(--accent-primary), white 20%);
 }
 
 .no-scrollbar::-webkit-scrollbar {
-    display: none;
+  display: none;
 }
 .no-scrollbar {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
 /* ADD THIS: The Nuclear Anti-Flicker Fix */
 .flicker-fix {
--webkit-backface-visibility: hidden;
-backface-visibility: hidden;
-transform: translate3d(0, 0, 0);
--webkit-transform: translate3d(0, 0, 0);
--webkit-perspective: 1000;
-perspective: 1000;
-will-change: transform, opacity;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  transform: translate3d(0, 0, 0);
+  -webkit-transform: translate3d(0, 0, 0);
+  -webkit-perspective: 1000;
+  perspective: 1000;
+  will-change: transform, opacity;
 }

@@ -3,14 +3,14 @@
 ## Project Summary
 
 - Personal portfolio site for Ollie Pinto.
-- Static-first site built with Astro 5 + React islands, Tailwind CSS, and Framer Motion.
+- Static-first site built with Astro 6 + React islands, Tailwind CSS 4, and Framer Motion.
 - Content-driven UI; most copy and data live in `src/data/portfolio.json`.
 
 ## Stack
 
 - Framework: Astro (`astro`).
 - UI: React 19 (islands inside Astro).
-- Styling: Tailwind CSS with CSS variables.
+- Styling: Tailwind CSS 4 with CSS-first theme variables.
 - Animation: Framer Motion.
 - Icons: Lucide React.
 - Fonts: `@fontsource/*` (Abril Fatface, Poppins, Geist Mono, Inter, Inter Tight, Newsreader).
@@ -54,8 +54,8 @@
 
 ## Styling System
 
-- Tailwind config in `tailwind.config.mjs`.
-- Design tokens defined as CSS variables in `src/styles/global.css`.
+- Tailwind configured via `@tailwindcss/vite` in `astro.config.mjs`.
+- Tailwind theme tokens and design tokens defined as CSS variables in `src/styles/global.css`.
 - Theme variables: `--bg-depth`, `--surface`, `--surface-hover`, `--accent-primary`, `--accent-secondary`, `--text-primary`, `--text-muted`, `--border-color`.
 - `dark` class switches variables.
 - Utility helpers in `global.css`: `.no-scrollbar`, `.flicker-fix`, and custom hover for accent primary.

@@ -7,9 +7,9 @@
     "ctaSecondary": "Get to Know Me"
   },
   "nav": [
-    { "label": "About", "href": "#about" },
-    { "label": "Experience", "href": "#work" },
-    { "label": "Experiments", "href": "#lab" }
+    { "label": "About", "href": "/#about" },
+    { "label": "Experience", "href": "/#work" },
+    { "label": "Experiments", "href": "/#lab" }
   ],
   "social": {
     "linkedin": {

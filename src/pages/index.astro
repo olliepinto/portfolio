@@ -1,6 +1,5 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import Loader from '../components/Loader';
 import Navbar from '../components/Navbar';
 import Hero from '../components/Hero.astro';
 import LogoSlider from '../components/LogoSlider.astro';
@@ -15,8 +14,6 @@ import Footer from '../components/Footer.astro';
     description="Senior B2B marketer building AI-powered marketing systems, workflow automation, and content strategies that drive pipeline efficiency and measurable growth."
     canonicalUrl="https://www.olliepinto.com/"
 >
-    <Loader client:load />
-
     <Navbar client:load />
 
     <Hero />

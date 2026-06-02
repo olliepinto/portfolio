@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import data from "../data/portfolio.json";
 import ThemeToggle from "./ThemeToggle";
@@ -9,15 +9,16 @@ import LinkedInIcon from "./LinkedInIcon";
 export default function Navbar() {
   const [isContactOpen, setIsContactOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const reduceMotion = useReducedMotion();
   const linkedin = data.social?.linkedin;
   const toggleMobileMenu = () => setIsMobileMenuOpen((isOpen) => !isOpen);
 
   return (
     <>
       <motion.nav
-        initial={{ y: -100, opacity: 0 }}
+        initial={false}
         animate={{ y: 0, opacity: 1 }}
-        transition={{ delay: 1 }}
+        transition={{ delay: reduceMotion ? 0 : 0.2 }}
         aria-label="Primary"
         className="fixed top-6 left-0 right-0 z-50 flex justify-center pointer-events-none px-4"
       >

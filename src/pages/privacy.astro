@@ -1,0 +1,85 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout
+  title="Privacy | Ollie Pinto"
+  description="Plain-English privacy information for Ollie Pinto's personal portfolio and contact form."
+  canonicalUrl="https://www.olliepinto.com/privacy"
+>
+  <Navbar client:load />
+
+  <article class="w-full px-6 pt-36 pb-20">
+    <div class="mx-auto max-w-3xl">
+      <p class="mb-4 text-sm font-semibold uppercase tracking-[0.24em] text-accent-secondary">
+        Privacy
+      </p>
+      <h1 class="mb-6 text-5xl font-serif font-normal text-text-primary md:text-7xl">
+        Privacy notice
+      </h1>
+      <p class="mb-10 text-lg leading-relaxed text-text-muted">
+        This is a personal portfolio for Ollie Pinto. It is designed to share public
+        professional information and provide a simple way to get in touch.
+      </p>
+
+      <div class="space-y-10 text-text-primary">
+        <section class="space-y-3">
+          <h2 class="text-2xl font-sans font-bold">What this site collects</h2>
+          <p class="leading-relaxed text-text-muted">
+            If you use the contact form, the site asks for your name, email address,
+            and message so Ollie can read and respond to your enquiry. Please avoid
+            sending sensitive information through the form.
+          </p>
+        </section>
+
+        <section class="space-y-3">
+          <h2 class="text-2xl font-sans font-bold">When you send a message</h2>
+          <p class="leading-relaxed text-text-muted">
+            Messages sent through the contact page are delivered using a third-party
+            form service. That service receives the details you submit so the message
+            can reach me.
+          </p>
+        </section>
+
+        <section class="space-y-3">
+          <h2 class="text-2xl font-sans font-bold">Why the information is used</h2>
+          <p class="leading-relaxed text-text-muted">
+            Contact details are used only to understand your message and reply where
+            appropriate. This site does not use those details for analytics, marketing
+            lists, or automated profiling.
+          </p>
+        </section>
+
+        <section class="space-y-3">
+          <h2 class="text-2xl font-sans font-bold">Storage and preferences</h2>
+          <p class="leading-relaxed text-text-muted">
+            The site avoids non-essential browser storage on first load. If you choose
+            a theme, that preference is stored in your browser so the selected theme can
+            be restored on later visits.
+          </p>
+        </section>
+
+        <section class="space-y-3">
+          <h2 class="text-2xl font-sans font-bold">How long messages are kept</h2>
+          <p class="leading-relaxed text-text-muted">
+            Messages are kept only for as long as they are useful for replying,
+            maintaining context, or handling a legitimate follow-up. Old messages can be
+            deleted when they are no longer needed.
+          </p>
+        </section>
+
+        <section class="space-y-3">
+          <h2 class="text-2xl font-sans font-bold">Getting in touch</h2>
+          <p class="leading-relaxed text-text-muted">
+            Please use the <a class="font-medium text-text-primary underline decoration-accent-secondary decoration-2 underline-offset-4" href="/contact">contact page</a>
+            to send a message about the portfolio or potential work.
+          </p>
+        </section>
+      </div>
+    </div>
+  </article>
+
+  <Footer />
+</Layout>

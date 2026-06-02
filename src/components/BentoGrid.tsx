@@ -57,7 +57,7 @@ type BentoContentMap = {
 
 const Card = ({ className = "", children, delay }: CardProps) => (
   <motion.div
-    initial={{ opacity: 0, y: 20 }}
+    initial={false}
     whileInView={{ opacity: 1, y: 0 }}
     viewport={{ once: true, margin: "-50px" }}
     transition={{ duration: 0.5, delay }}
@@ -93,7 +93,14 @@ export default function BentoGrid() {
   const substack = bentoContent.substack;
 
   return (
-    <section id="about" className="w-full max-w-[1280px] px-6 py-24 mx-auto">
+    <section
+      id="about"
+      aria-labelledby="about-heading"
+      className="w-full max-w-[1280px] px-6 py-24 mx-auto"
+    >
+      <h2 id="about-heading" className="sr-only">
+        About Ollie Pinto
+      </h2>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 h-full">
         <Card
           className="md:col-span-2 flex flex-col justify-between h-full"

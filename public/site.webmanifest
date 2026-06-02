@@ -1,0 +1,22 @@
+{
+  "name": "Ollie Pinto",
+  "short_name": "Ollie Pinto",
+  "description": "Personal portfolio for Ollie Pinto, a full-stack B2B marketer building AI-powered marketing systems, workflow automation, and content strategies.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "minimal-ui",
+  "background_color": "#fcfcfd",
+  "theme_color": "#fcfcfd",
+  "icons": [
+    {
+      "src": "/assets/favicon-196x196.png",
+      "sizes": "196x196",
+      "type": "image/png"
+    },
+    {
+      "src": "/assets/android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

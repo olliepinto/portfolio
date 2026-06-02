@@ -1,0 +1,45 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout
+  title="Page not found | Ollie Pinto"
+  description="The page you requested could not be found."
+  canonicalUrl="https://www.olliepinto.com/404"
+  robots="noindex, follow"
+>
+  <Navbar client:load />
+
+  <section class="w-full min-h-[80vh] px-6 pt-36 pb-20">
+    <div class="mx-auto flex max-w-3xl flex-col items-start gap-6">
+      <p class="text-sm font-semibold uppercase tracking-[0.24em] text-accent-secondary">
+        404
+      </p>
+      <h1 class="text-5xl font-serif font-normal text-text-primary md:text-7xl">
+        Page not found.
+      </h1>
+      <p class="max-w-2xl text-lg leading-relaxed text-text-muted">
+        The page might have moved, or the URL may be incorrect. You can return to
+        the portfolio homepage or use the contact page if you were trying to get in touch.
+      </p>
+      <div class="flex flex-col gap-3 sm:flex-row">
+        <a
+          href="/"
+          class="inline-flex items-center justify-center rounded-full bg-text-primary px-6 py-3 font-sans font-bold text-bg-depth transition-transform hover:scale-[1.02]"
+        >
+          Go Home
+        </a>
+        <a
+          href="/contact"
+          class="inline-flex items-center justify-center rounded-full border border-border-color bg-surface px-6 py-3 font-sans font-medium text-text-primary transition-colors hover:bg-surface-hover"
+        >
+          Contact Ollie
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+</Layout>

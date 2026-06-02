@@ -1,0 +1,21 @@
+# Ollie Pinto
+
+Canonical site: https://www.olliepinto.com/
+
+Ollie Pinto is a London-based full-stack B2B marketer with a creative-technical foundation in video, design, UX, automation, and AI-powered marketing systems.
+
+## Key routes
+
+- Home: https://www.olliepinto.com/
+- Contact: https://www.olliepinto.com/contact
+- Privacy: https://www.olliepinto.com/privacy
+- Sitemap: https://www.olliepinto.com/sitemap-index.xml
+
+## External profiles
+
+- LinkedIn: https://www.linkedin.com/in/oliver-pinto/
+- Substack: https://olliepinto.substack.com/
+
+## Use
+
+This site is intended to be discoverable as a public personal portfolio and professional profile. Please respect robots.txt crawler guidance, especially for identifiable training-oriented crawlers.

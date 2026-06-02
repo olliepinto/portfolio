@@ -43,7 +43,7 @@ export default function ThemeToggle() {
     >
       <motion.div
         key={theme}
-        initial={{ scale: 0.5, opacity: 0, rotate: -90 }}
+        initial={false}
         animate={{ scale: 1, opacity: 1, rotate: 0 }}
         transition={{ duration: 0.2 }}
       >

@@ -3,9 +3,9 @@ import type { RefObject } from "react";
 const FOCUSABLE_SELECTORS = [
   "a[href]",
   "button:not([disabled])",
-  "textarea",
-  "input",
-  "select",
+  "textarea:not([disabled])",
+  "input:not([disabled])",
+  "select:not([disabled])",
   '[tabindex]:not([tabindex="-1"])',
 ].join(", ");
 
@@ -53,6 +53,11 @@ export const enableModalAccessibility = ({
   closeButtonRef,
   onClose,
 }: ModalAccessibilityOptions) => {
+  const previouslyFocused =
+    document.activeElement instanceof HTMLElement
+      ? document.activeElement
+      : null;
+
   setMainInert(true);
 
   const dialogNode = dialogRef.current;
@@ -89,5 +94,6 @@ export const enableModalAccessibility = ({
   return () => {
     document.removeEventListener("keydown", handleKeyDown);
     setMainInert(false);
+    previouslyFocused?.focus();
   };
 };

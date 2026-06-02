@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import { ArrowUpRight, X, Calendar, ChevronRight } from "lucide-react";
 import data from "../data/portfolio.json";
 import { enableModalAccessibility, getModalRoot } from "./modalUtils";
@@ -9,6 +9,7 @@ type Project = (typeof data.work.projects)[number];
 
 export default function CaseStudyRail() {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+  const reduceMotion = useReducedMotion();
   const dialogRef = useRef<HTMLDivElement>(null);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
   const modalRoot = getModalRoot();
@@ -40,8 +41,12 @@ export default function CaseStudyRail() {
           <motion.div
             ref={dialogRef}
             initial={{ scale: 0.9, opacity: 0, y: 20 }}
-            animate={{ scale: 1, opacity: 1, y: 0 }}
-            exit={{ scale: 0.9, opacity: 0, y: 20 }}
+            animate={
+              reduceMotion ? { opacity: 1 } : { scale: 1, opacity: 1, y: 0 }
+            }
+            exit={
+              reduceMotion ? { opacity: 0 } : { scale: 0.9, opacity: 0, y: 20 }
+            }
             onClick={(e) => e.stopPropagation()}
             role="dialog"
             aria-modal="true"
@@ -141,7 +146,7 @@ export default function CaseStudyRail() {
             aria-controls="project-detail-dialog"
             aria-label={`View case study details for ${project.client}`}
             className={`bg-surface border border-border-color rounded-2xl p-8 cursor-pointer hover:shadow-lg hover:border-accent-secondary/30 transition-colors transition-shadow duration-300 group h-full flex flex-col flicker-fix text-left ${project.id === "early-career" ? "md:col-span-2 lg:col-span-3" : ""}`}
-            initial={{ opacity: 0, y: 20, z: 0 }}
+            initial={false}
             whileInView={{ opacity: 1, y: 0, z: 0 }}
             viewport={{ once: true, margin: "-50px" }}
             transition={{ delay: index * 0.05 }}

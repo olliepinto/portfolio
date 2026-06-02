@@ -7,19 +7,13 @@ interface HeroTextProps {
 }
 
 export default function HeroText({ headingId }: HeroTextProps) {
-  const loaderDelay =
-    typeof document !== "undefined" &&
-    document.documentElement.dataset.loader === "show"
-      ? 2.5
-      : 0;
   const container = {
     hidden: { opacity: 0 },
     show: {
       opacity: 1,
       transition: {
         staggerChildren: 0.1,
-        // Only delay when the loader actually runs.
-        delayChildren: loaderDelay,
+        delayChildren: 0,
       },
     },
   } satisfies Variants;
@@ -39,7 +33,7 @@ export default function HeroText({ headingId }: HeroTextProps) {
   return (
     <motion.div
       variants={container}
-      initial="hidden"
+      initial={false}
       animate="show"
       className="flex flex-col items-center md:items-start text-center md:text-left space-y-8"
     >
@@ -49,7 +43,6 @@ export default function HeroText({ headingId }: HeroTextProps) {
         className="inline-flex items-center gap-2 px-4 py-2 border border-border-color rounded-full bg-surface/80 backdrop-blur-md shadow-sm hover:border-accent-primary/50 transition-colors"
       >
         <span className="relative flex h-2 w-2">
-          {/* FIX: Changed 'class' to 'className' in these spans */}
           <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent-primary opacity-75"></span>
           <span className="relative inline-flex rounded-full h-2 w-2 bg-accent-primary"></span>
         </span>
@@ -82,13 +75,13 @@ export default function HeroText({ headingId }: HeroTextProps) {
       >
         <a
           href="#work"
-          className="px-8 py-4 bg-text-primary text-bg-depth font-bold rounded-full hover:scale-105 transition-transform shadow-lg flex items-center justify-center gap-2 font-sans"
+          className="px-8 py-4 bg-text-primary text-bg-depth font-bold rounded-full hover:scale-105 transition-transform shadow-lg flex items-center justify-center gap-2 font-sans focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-text-primary"
         >
           {data.hero.ctaPrimary} <ArrowDownRight size={20} />
         </a>
         <a
           href="#about"
-          className="px-8 py-4 bg-surface border border-border-color text-text-primary font-medium rounded-full hover:bg-surface-hover transition-colors flex items-center justify-center font-sans"
+          className="px-8 py-4 bg-surface border border-border-color text-text-primary font-medium rounded-full hover:bg-surface-hover transition-colors flex items-center justify-center font-sans focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-text-primary"
         >
           {data.hero.ctaSecondary}
         </a>

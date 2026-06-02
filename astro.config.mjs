@@ -5,7 +5,12 @@ import tailwindcss from "@tailwindcss/vite";
 
 export default defineConfig({
   site: "https://www.olliepinto.com",
-  integrations: [react(), sitemap()],
+  integrations: [
+    react(),
+    sitemap({
+      filter: (page) => !page.endsWith("/404"),
+    }),
+  ],
   vite: {
     plugins: [tailwindcss()],
   },

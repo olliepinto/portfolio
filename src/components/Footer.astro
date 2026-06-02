@@ -7,6 +7,10 @@ const linkedin = data.social?.linkedin;
     <div class="text-xs text-text-muted opacity-50 font-sans">
       {data.footer}
     </div>
+    <nav aria-label="Footer" class="flex items-center gap-4 text-xs font-sans text-text-muted">
+      <a class="hover:text-text-primary transition-colors" href="/contact">Contact</a>
+      <a class="hover:text-text-primary transition-colors" href="/privacy">Privacy</a>
+    </nav>
     {linkedin ? (
       <a
         href={linkedin.url}

@@ -61,6 +61,16 @@
     @apply bg-bg-depth text-text-primary font-sans antialiased transition-colors duration-300;
   }
 
+  a:focus-visible,
+  button:focus-visible,
+  input:focus-visible,
+  textarea:focus-visible,
+  select:focus-visible,
+  [tabindex]:focus-visible {
+    outline: 2px solid var(--text-primary);
+    outline-offset: 3px;
+  }
+
   /* Headings use Abril Fatface */
   h1,
   h2,
@@ -72,13 +82,18 @@
   }
 }
 
-html[data-loader="skip"] [data-site-loader] {
-  display: none !important;
-}
-
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto !important;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
   }
 }
 

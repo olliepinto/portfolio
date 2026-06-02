@@ -40,22 +40,33 @@ Last local verification: 2026-06-02.
   - Preview responses include `Content-Security-Policy`, `X-Content-Type-Options`, `X-Frame-Options`, `Referrer-Policy`, `Permissions-Policy`, `Strict-Transport-Security`, `Link`, and `Cache-Control`
   - 404 preview response includes `X-Robots-Tag: noindex`
 
-## Still requires external verification
+## Production verification completed
 
-- Production header checks require a production deployment or promotion.
-- Read-only production check on 2026-05-31 confirmed production is still the old deployment:
-  - `/contact`, `/privacy`, `/llms.txt`, and an unknown route return Vercel plain-text `404`
-  - new CSP, `X-Content-Type-Options`, `X-Frame-Options`, `Referrer-Policy`, `Permissions-Policy`, and `Link` headers are not present on `/`
-- Header verification should check:
+- Production deployment completed on 2026-06-02:
+  - Production URL: `https://portfolio-b6lftj0bz-ollies-projects-cc9d24ca.vercel.app`
+  - Aliased domain: `https://www.olliepinto.com`
+  - Vercel deployment ID: `dpl_5hqM4tdAEzXBFdx7esCJ27yn39pw`
+  - Inspect URL: `https://vercel.com/ollies-projects-cc9d24ca/portfolio/5hqM4tdAEzXBFdx7esCJ27yn39pw`
+- Production route checks passed:
+  - `/`, `/contact`, and `/privacy` return `200`
+  - `/missing-page` returns `404`
+  - `/404` returns `404`
+  - `robots.txt`, `llms.txt`, `site.webmanifest`, and `favicon.ico` return `200`
+- Production responses include:
   - `Content-Security-Policy`
   - `X-Content-Type-Options`
   - `X-Frame-Options`
   - `Referrer-Policy`
   - `Permissions-Policy`
   - `Strict-Transport-Security`
-  - `Cache-Control`
   - `Link`
-  - `X-Robots-Tag` on the 404 route
+- 404 noindex verification passed:
+  - Unknown routes include the 404 page `noindex, follow` metadata
+  - `/404` includes `X-Robots-Tag: noindex, follow`
+- Production content checks passed:
+  - contact and privacy pages do not expose implementation-provider or personal email process copy
+  - contact, privacy, and 404 navbar links resolve to homepage anchors
+  - homepage intro loader markup is absent
 
 ## Useful commands
 
